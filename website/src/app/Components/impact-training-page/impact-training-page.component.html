@@ -1,0 +1,291 @@
+<div class="TN-management" *ngIf="!showTraineeList">
+  <div class="inner-TNmanagement">
+    <h2>Impact Training</h2>
+  </div>
+  <div class="inner-TNmanagement">
+    <h4>Impact Training</h4>
+  </div>
+  <div class="inner-TNmanagement">
+    <div class="inner-contents">
+      <i class="ph ph-magnifying-glass"></i>
+      <form [formGroup]="KeywordForm" (ngSubmit)="$event.preventDefault()">
+        <input
+          type="text"
+          placeholder="Search by Keyword"
+          formControlName="filterByKeyword"
+          (ngModelChange)="filterByKeyword = $event"
+        />
+      </form>
+    </div>
+    <div class="inner-contents">
+      <div class="inner-functionalites">
+        <div class="function-buttons">
+          <button type="button" *ngIf="TNData.length < 10">Employees : 0{{ TNData.length }}</button>
+          <button type="button" *ngIf="TNData.length >= 10">Employees : {{ TNData.length }}</button>
+        </div>
+        <div class="function-buttons">
+          <button type="button"><i class="ph ph-download-simple"></i></button>
+        </div>
+        <div class="function-buttons">
+          <button type="button" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
+        </div>
+      </div>
+      <div class="inner-functionalites">
+        <div class="functionality-buttons">
+          <button type="button" (click)="showMember()"><i class="ph ph-plus"></i> Add Employee</button>
+        </div>
+        <div class="functionality-buttons">
+          <button type="button" (click)="showFileUpload()"><i class="ph ph-paperclip"></i> Upload Files</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="inner-TNmanagement">
+    <div class="scroll-content" style="max-height: 250px; overflow-y: auto;">
+      <table>
+        <thead>
+          <tr class="table-header">
+            <th>
+              <input type="checkbox" id="parentCheckBox" (change)="clickAllCheckBoxes()" />
+            </th>
+            <th class="data">ACE ID <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Name <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Mail ID <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">College Name <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Practice <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Date of Joining <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Action <i class="ph ph-funnel-simple"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="TNData.length === 0" class="nodata">
+            <td colspan="8">No Data Found</td>
+          </tr>
+          <tr *ngFor="let data of TNData; let i = index" class="table-data">
+            <td>
+              <input type="checkbox" [id]="'checkbox' + i" />
+            </td>
+            <td class="data" title="{{ data.ACE_ID }}" (click)="showTraineeDetails(i)">{{ data.ACE_ID }}</td>
+            <td class="data" title="{{ data.NAME }}">{{ data.NAME }}</td>
+            <td class="data" title="{{ data.Mail_Id }}">{{ data.Mail_Id }}</td>
+            <td class="data" title="{{ data.College }}">{{ data.College }}</td>
+            <td class="data" title="{{ data.Practice }}">{{ data.Practice }}</td>
+            <td class="data" title="{{ data.Date_of_Joining }}">{{ data.Date_of_Joining }}</td>
+            <td class="data">
+              <button type="button" (click)="editMember(i)"><i class="ph ph-pencil-simple"></i></button>
+              <button type="button" (click)="deleteMember(i)"><i class="ph ph-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Add Member Form -->
+<div class="Member-Management" *ngIf="showMemberManagement">
+  <div class="inner-Membermanagement">
+    <form [formGroup]="memberForm" (ngSubmit)="addMember(memberForm.value)">
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <h2>Add Employee</h2>
+        </div>
+        <div class="inner-formcontrols" (click)="showMember()">
+          <i class="ph ph-x"></i>
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="ACE ID" formControlName="ACE_ID" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="First Name" formControlName="First_Name" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Last Name" formControlName="Last_Name" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Designation" formControlName="Designation" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Team" formControlName="Team" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Practice" formControlName="Practice" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <button type="button" (click)="clearForm()"><i class="ph ph-prohibit"></i> Cancel</button>
+        </div>
+        <div class="inner-formcontrols">
+          <button type="submit" [disabled]="!memberForm.valid"><i class="ph ph-plus"></i> Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Upload File Form -->
+<div class="Member-Management" *ngIf="showUploadFile">
+  <div class="inner-Membermanagement">
+    <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <h2>Upload File</h2>
+        </div>
+        <div class="inner-formcontrols" (click)="showFileUpload()">
+          <i class="ph ph-x"></i>
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols fileUpload">
+          <input type="file" placeholder="Excel File" formControlName="fileUpload" (change)="onFileChange($event)" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <button type="button" (click)="clearForm()"><i class="ph ph-prohibit"></i> Cancel</button>
+        </div>
+        <div class="inner-formcontrols">
+          <button type="submit" [disabled]="!uploadForm.valid">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit Member Form -->
+<div class="Member-Management" *ngIf="showEditMember">
+  <div class="inner-Membermanagement">
+    <form [formGroup]="editMemberForm" (ngSubmit)="EditedMemberDetails(editMemberForm.value)">
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <h2>Edit Employee</h2>
+        </div>
+        <div class="inner-formcontrols" (click)="showEdit()">
+          <i class="ph ph-x"></i>
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="ACE ID" formControlName="ACE_ID" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="First Name" formControlName="First_Name" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Mail ID" formControlName="Mail_ID" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="College Name" formControlName="College_Name" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Practice" formControlName="Practice" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="DOJ" formControlName="DOJ" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <button type="button" (click)="clearForm()"><i class="ph ph-prohibit"></i> Cancel</button>
+        </div>
+        <div class="inner-formcontrols">
+          <button type="submit" [disabled]="!editMemberForm.valid">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Individual Trainee Details -->
+<div class="showTraineeDetails" *ngIf="showTraineeList">
+  <div class="inner-TraineeDetails">
+    <div class="inner-TNmanagement">
+      <h2>Impact Trainee</h2>
+    </div>
+    <div class="inner-TNmanagement">
+      <button type="button" (click)="showTraineeDetails(-1)"><i class="ph ph-rewind"></i> Back</button>
+    </div>
+  </div>
+  <div class="inner-TraineeDetails">
+    <div class="TraineeDetails">
+      <img src="./assets/Dashboard/DashboardProfile.svg" alt="profileImage" />
+    </div>
+    <div class="TraineeDetails">
+      <table>
+        <tbody class="scroll-content-2" style="max-height: 360px; overflow-y: auto;">
+          <tr>
+            <td><label>ACE ID</label><p>{{ traineeDetail.ACE_ID }}</p></td>
+            <td><label>Name</label><p>{{ traineeDetail.NAME }}</p></td>
+            <td><label>Professional Mail ID</label><p>{{ traineeDetail.Mail_Id }}</p></td>
+          </tr>
+          <tr>
+            <td><label>Department</label><p>{{ traineeDetail.Department }}</p></td>
+            <td><label>Date of Joining</label><p>{{ traineeDetail.Date_of_Joining }}</p></td>
+            <td><label>Personal Mail ID</label><p>{{ traineeDetail.Personal_Email_id }}</p></td>
+          </tr>
+          <tr>
+            <td><label>Location</label><p>{{ traineeDetail.Location }}</p></td>
+            <td><label>Contact Number</label><p>{{ traineeDetail.Contact_Num }}</p></td>
+            <td><label>College Name</label><p>{{ traineeDetail.College }}</p></td>
+          </tr>
+          <tr>
+            <td><label>Gender</label><p>{{ traineeDetail.Gender }}</p></td>
+            <td><label>TN HR Partner</label><p>{{ traineeDetail.TN_HR_Partner }}</p></td>
+            <td><label>Qualification</label><p>{{ traineeDetail.Qualification }}</p></td>
+          </tr>
+          <tr>
+            <td><label>Designation</label><p>{{ traineeDetail.Designation }}</p></td>
+            <td><label>Track</label><p>{{ traineeDetail.Track }}</p></td>
+            <td><label>COE/Campus/Off Campus</label><p>{{ traineeDetail.COE_Campus_Off_Campus }}</p></td>
+          </tr>
+          <tr>
+            <td><label>Practice</label><p>{{ traineeDetail.Practice }}</p></td>
+            <td><label>Sub Practice</label><p>{{ traineeDetail.Sub_Practice }}</p></td>
+            <td><label>Active/Exit</label><p>{{ traineeDetail.Active_Exit }}</p></td>
+          </tr>
+          <tr>
+            <td><label>Practice IDM</label><p>{{ traineeDetail.Practice_IDM }}</p></td>
+            <td><label>Movement Initiated</label><p>{{ traineeDetail.Movement_Initiated }}</p></td>
+            <td><label>Date of Movement</label><p>{{ traineeDetail.Date_of_Movement}}</p></td>
+          </tr>
+          <tr>
+            <td><label>Technology</label><p>{{ traineeDetail.Technology }}</p></td>
+            <td><label>TN Review Score</label><p>{{ traineeDetail.TN_Review_Score }}</p></td>
+            <td><label>TN Review Conducted</label><p>{{ traineeDetail.TN_Review_Conducted }}</p></td>
+          </tr>
+          <tr>
+            <td><label>TN Review Feedback</label><p>{{ traineeDetail.TN_Review_Feedback }}</p></td>
+            <td><label>Follow Up TN Review</label><p>{{ traineeDetail.Follow_Up_TN_Review }}</p></td>
+            <td><label>Follow Up TN Feedback</label><p>{{ traineeDetail.Follow_Up_TN_Feedback }}</p></td>
+          </tr>
+          <tr>
+            <td><label>SL Review Conducted</label><p>{{ traineeDetail.SL_Review_Conducted }}</p></td>
+            <td><label>SL Review Score</label><p>{{ traineeDetail.SL_Review_Score }}</p></td>
+            <td><label>SL Review Feedback</label><p>{{ traineeDetail.SL_Review_Feedback }}</p></td>
+          </tr>
+          <tr>
+            <td><label>No Of Days in TN</label><p>{{ traineeDetail.No_of_days_in_TN }}</p></td>
+            <td><label>Resignation Type</label><p>{{ traineeDetail.Resignation_Type }}</p></td>
+            <td><label>Reason For Exit</label><p>{{ traineeDetail.Reason_for_Exit }}</p></td>
+          </tr>
+          <tr>
+            <td><label>Releiving Date</label><p>{{ traineeDetail.Releiving_Date}}</p></td>
+            <td><label>Project Name</label><p>{{ traineeDetail.Project_Name }}</p></td>
+            <td><label>Moved Date</label><p>{{ traineeDetail.Moved_Date }}</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

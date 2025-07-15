@@ -1,0 +1,102 @@
+:host{
+    --primary-color: #ffff;
+    --secondary-color: #9C6FE4;
+    --tertiary-color:#757575;
+    --font-color: #1E1F24;
+    --header-color: #FAF8FE;
+}
+
+.TN-management{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 30px;
+}
+.inner-TNmanagement{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+.inner-TNmanagement h2{
+    font-size: 1.8vw;
+    font-weight: 500;
+}
+.inner-TNmanagement h4{
+    font-size: 1vw;
+    color: var(--secondary-color);
+    font-weight: 400;
+}
+.inner-TNmanagement:nth-child(3){
+    background-color: var(--primary-color);
+    padding: 15px;
+}
+.inner-TNmanagement form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+form .form-controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.inner-form-controls{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label{
+    font-size: 1.1vw;
+    color: var(--secondary-color);
+}
+
+input{
+    height: 40px;
+    width: 300px;
+    border-radius: 10px;
+    border: 1px solid var(--tertiary-color);
+    padding-left: 20px;
+    font-size: 1.2vw;
+}
+select{
+    height: 40px;
+    width: 300px;
+    border-radius: 10px;
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    font-size: 1.2vw;
+}
+
+select:focus{
+    outline: none;
+    border: 2px solid var(--secondary-color);
+}
+input:focus{
+    outline: none;
+    border: 2px solid var(--secondary-color);
+}
+
+.inner-form-controls:nth-child(1) button{
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.inner-form-controls:nth-child(2) button{
+    background-color: var(--secondary-color);
+    border: none;
+    color: var(--primary-color);
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,475 @@
+:host{
+    --primary-color: #ffff;
+    --secondary-color: #9C6FE4;
+    --tertiary-color:#757575;
+    --font-color: #1E1F24;
+    --header-color: #FAF8FE;
+}
+
+.TN-management{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 30px;
+}
+.inner-TNmanagement{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+.inner-TNmanagement h2{
+    font-size: 1.8vw;
+    font-weight: 500;
+}
+.inner-TNmanagement h4{
+    font-size: 1vw;
+    color: var(--secondary-color);
+    font-weight: 400;
+}
+
+.inner-TNmanagement input{
+    width: 200px;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
+}
+
+.inner-TNmanagement:nth-child(3) .inner-contents:nth-child(1) {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+}
+
+.ph-magnifying-glass{
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
+    display: flex;
+    font-size: 1.6vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-contents{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.inner-functionalites{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.function-buttons button{
+    padding: 10px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 1.3vw;
+}
+.function-buttons button:hover{
+
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+
+}
+
+.functionality-buttons button{
+    padding: 10px 20px 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.functionality-buttons:nth-child(1) button{
+background-color: var(--secondary-color);
+color: var(--primary-color);
+}
+.functionality-buttons:nth-child(2) button{
+background-color: var(--primary-color);
+color: var(--secondary-color);
+border: 1px solid var(--secondary-color);
+}
+
+
+.inner-TNmanagement:nth-child(4){
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    padding: 10px 15px 10px 15px;
+}
+
+.inner-TNmanagement:nth-child(4) .inner-contents{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--primary-color);
+    
+}
+
+
+.inner-TNmanagement table{
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    width: 960px;
+}
+
+.inner-TNmanagement table tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    padding: 10px 0px 10px 0px;
+}
+
+.table-data input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.table-header{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--header-color);
+    height: 30px;
+    align-items: center;
+}
+
+
+.table-header input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+.table-row input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.table-row td:nth-child(7){
+    visibility: hidden;
+}
+
+
+.inner-TNmanagement table tr td{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    height: 40px;
+    font-size: 0.9vw;
+    text-align: left;
+    text-transform: capitalize;
+}
+.data{
+    width: 120px;
+}
+.data:nth-child(2){
+    width: 70px;
+}
+.data:nth-child(3){
+    width: 130px;
+}
+.data:nth-child(4){
+    width: 200px;
+    text-transform: none;
+}
+.data:nth-child(5){
+    width: 150px;
+}
+.data:nth-child(6){
+    width: 90px;
+}
+.data:nth-child(7){
+    justify-content: center;
+}
+
+.inner-TNmanagement table td:nth-child(2){
+    color: var(--secondary-color);
+}
+.inner-TNmanagement table tr input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+.inner-TNmanagement table tr th{
+    color: var(--font-color);
+    font-size: 1vw;
+    display: flex;
+    gap: 10px;
+}
+
+.inner-TNmanagement table td input{
+    border: 1px solid var(--tertiary-color);
+    width: 140px;
+    height: 27px;
+    border-radius: 3px;
+    padding-left: 3px;
+    font-size: 0.8vw;
+}
+
+.inner-TNmanagement table .ph-magnifying-glass{
+    position: absolute;
+    background-color: transparent;
+    right: 6px;
+    top: 6px;
+    font-size: 1.2vw;
+}
+
+.bottom-align{
+    margin-top: 4px;
+}
+
+.inner-TNmanagement td button{
+    width: 20px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    font-size: 1.4vw;
+}
+.table-data{
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+}
+.data:nth-child(8){
+    justify-content: center;
+}
+
+.table-data:hover{
+    background-color: var(--header-color);
+    cursor: pointer;
+}
+
+.scroll-content{
+    height: 250px;
+    overflow-y: scroll;
+}
+
+.scroll-content::-webkit-scrollbar{
+    width: 5px;
+}
+
+.scroll-content::-webkit-scrollbar-track{
+    background-color: var(--primary-color);
+}
+
+.scroll-content::-webkit-scrollbar-thumb{
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.Member-Management{
+    position:absolute;
+    inset: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-Membermanagement{
+    background-color: var(--primary-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.formcontrols h2{
+    font-size: 1.3vw;
+    font-weight: 500;
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formcontrols{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.formcontrols input{
+    height: 40px;
+    width: 350px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid var(--tertiary-color);
+    padding-left: 10px;
+    text-transform: capitalize;
+}
+
+.inner-formcontrols button{
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    cursor: pointer;
+    font-size: 1.2vw;
+}
+.inner-formcontrols:nth-child(2) button{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+.ph-x{
+    font-size: 1.4vw;
+    cursor: pointer;
+}
+.fileUpload input{
+    border: none;
+}
+
+.nodata{
+    display: flex;
+    justify-content: center;
+}
+
+
+.showTraineeDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 30px;
+    
+}
+
+
+
+.inner-TraineeDetails:nth-child(1){
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inner-TraineeDetails h2{
+    font-size: 1.8vw;
+    font-weight: 500;
+}
+
+.inner-TraineeDetails button{
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    gap: 10px;
+    font-size: 1.4vw;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    background-color: var(--primary-color);
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.inner-TraineeDetails:nth-child(2){
+    background-color: var(--primary-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    flex-wrap: wrap;
+    height: 420px;
+}
+
+
+.inner-TraineeDetails:nth-child(2) img{
+    width: 150px;
+    height: 150px;
+}
+
+.TraineeDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.TraineeDetails:nth-child(2){
+    width: 80%;
+}
+
+.inner-TraineeDetail p{
+    font-size: 1.2vw;
+    text-transform: capitalize;
+}
+.inner-TraineeDetail label{
+    font-size: 1vw;
+    text-transform: capitalize;
+    color: var(--secondary-color);
+}
+
+
+
+.inner-TraineeDetails table{
+    width: 100%;
+}
+
+.scroll-content-2{
+    height: 360px;
+    overflow-y: scroll;
+}
+
+.scroll-content-2::-webkit-scrollbar{
+    width: 5px;
+}
+
+.scroll-content-2::-webkit-scrollbar-track{
+    background-color: var(--primary-color);
+   
+}
+
+.scroll-content-2::-webkit-scrollbar-thumb{
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.inner-TraineeDetails table tr{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+}
+.inner-TraineeDetails table tr td{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    align-items: left;
+}
+.inner-TraineeDetails td label{
+    font-size: 1vw;
+    text-transform: capitalize;
+    color: var(--secondary-color);
+}
+.inner-TraineeDetails td p{
+    font-size: 1.2vw;
+    text-transform: capitalize;
+}
+.inner-TraineeDetails table tr td:nth-child(1){
+    width: 150px;
+}
+.inner-TraineeDetails table tr td:nth-child(2){
+    width: 200px;
+}
+.inner-TraineeDetails table tr td:nth-child(3){
+    width: 400px;
+}

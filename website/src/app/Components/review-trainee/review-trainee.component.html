@@ -1,0 +1,118 @@
+<!-- Review Trainee List -->
+<div class="TN-management" *ngIf="!showTraineeList">
+  <div class="inner-TNmanagement">
+    <h2>Review - Trainee</h2>
+  </div>
+  <div class="inner-TNmanagement">
+    <h4>Review - Trainee</h4>
+  </div>
+  <div class="inner-TNmanagement">
+    <div class="inner-contents">
+      <i class="ph ph-magnifying-glass"></i>
+      <form [formGroup]="KeywordForm" (ngSubmit)="$event.preventDefault()">
+        <input
+          type="text"
+          placeholder="Search by Keyword"
+          formControlName="filterByKeyword"
+          (ngModelChange)="filterByKeyword = $event"
+        />
+      </form>
+    </div>
+    <div class="inner-contents">
+      <div class="inner-functionalites">
+        <div class="function-buttons">
+          <button type="button" *ngIf="TNData.length < 10">Employees : 0{{ TNData.length }}</button>
+          <button type="button" *ngIf="TNData.length >= 10">Employees : {{ TNData.length }}</button>
+        </div>
+        <div class="function-buttons">
+          <button type="button"><i class="ph ph-download-simple"></i></button>
+        </div>
+        <div class="function-buttons">
+          <button type="button" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="inner-TNmanagement">
+    <div class="scroll-content" style="max-height: 250px; overflow-y: auto;">
+      <table>
+        <thead>
+          <tr class="table-header">
+            <th>
+              <input type="checkbox" id="parentCheckBox" (change)="clickAllCheckBoxes()" />
+            </th>
+            <th class="data">Trainee ID <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Trainee Name <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Technology <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Action <i class="ph ph-funnel-simple"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="TNData.length === 0" class="nodata">
+            <td colspan="5">No Data Found</td>
+          </tr>
+          <tr *ngFor="let data of TNData; let i = index" class="table-data">
+            <td>
+              <input type="checkbox" [id]="'checkbox' + i" />
+            </td>
+            <td class="data" title="{{ data.ACE_ID }}">{{ data.TRAINEE_ID }}</td>
+            <td class="data" title="{{ data.NAME }}">{{ data.TRAINEE_NAME }}</td>
+            <td class="data" title="{{ data.Mail_Id }}">{{ data.TECHNOLOGY }}</td>
+            <td class="data">
+              <button type="button" (click)="showTraineeDetails(i)"><i class="ph ph-eye"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Member Form -->
+<div class="Member-Management" *ngIf="showEditMember">
+  <div class="inner-Membermanagement">
+    <form [formGroup]="editMemberForm" (ngSubmit)="EditedMemberDetails(editMemberForm.value)">
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <h2>Edit Employee</h2>
+        </div>
+        <div class="inner-formcontrols" (click)="showEdit()">
+          <i class="ph ph-x"></i>
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="ACE ID" formControlName="ACE_ID" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="First Name" formControlName="First_Name" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Mail ID" formControlName="Mail_ID" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="College Name" formControlName="College_Name" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Practice" formControlName="Practice" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="DOJ" formControlName="DOJ" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <button type="button" (click)="clearForm()"><i class="ph ph-prohibit"></i> Cancel</button>
+        </div>
+        <div class="inner-formcontrols">
+          <button type="submit" [disabled]="!editMemberForm.valid">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

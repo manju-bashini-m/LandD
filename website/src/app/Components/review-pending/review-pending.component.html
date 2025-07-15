@@ -1,0 +1,189 @@
+<div class="TN-management" *ngIf="!showTraineeList">
+  <div class="inner-TNmanagement">
+    <h2>Review - Pending</h2>
+  </div>
+  <div class="inner-TNmanagement">
+    <h4>Review - Pending</h4>
+  </div>
+  <div class="inner-TNmanagement">
+    <div class="inner-contents">
+      <i class="ph ph-magnifying-glass"></i>
+      <form [formGroup]="KeywordForm" (ngSubmit)="$event.preventDefault()">
+        <input
+          type="text"
+          placeholder="Search by Keyword"
+          formControlName="filterByKeyword"
+          (ngModelChange)="filterByKeyword = $event"
+        />
+      </form>
+    </div>
+    <div class="inner-contents">
+      <div class="inner-functionalites">
+        <div class="function-buttons">
+          <button type="button" *ngIf="reviewDetails.length < 10">Employees : 0{{ reviewDetails.length }}</button>
+          <button type="button" *ngIf="reviewDetails.length >= 10">Employees : {{ reviewDetails.length }}</button>
+        </div>
+        <div class="function-buttons">
+          <button type="button"><i class="ph ph-download-simple"></i></button>
+        </div>
+        <div class="function-buttons">
+          <button type="button" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
+        </div>
+      </div>
+      <div class="inner-functionalites">
+        <div class="functionality-buttons">
+          <button type="button" (click)="showFileUpload()"><i class="ph ph-paperclip"></i> Upload Files</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="inner-TNmanagement">
+    <div class="scroll-content" style="max-height: 250px; overflow-y: auto;">
+      <table>
+        <thead>
+          <tr class="table-header">
+            <th>
+              <input type="checkbox" id="parentCheckBox" (change)="clickAllCheckBoxes()" />
+            </th>
+            <th class="data">Trainee ID <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Trainee Name <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Reviewer Name <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Technology <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">TN Team <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Review Type <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Review Date <i class="ph ph-funnel-simple"></i></th>
+            <th class="data">Action <i class="ph ph-funnel-simple"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="reviewDetails.length === 0" class="nodata">
+            <td colspan="9">No Data Found</td>
+          </tr>
+          <tr *ngFor="let data of reviewDetails; let i = index" class="table-data">
+            <td>
+              <input type="checkbox" [id]="'checkbox' + i" />
+            </td>
+            <td class="data" title="{{ data.ACE_ID }}" (click)="showTraineeDetails(i)">{{ data.TRAINEE_ID }}</td>
+            <td class="data" title="{{ data.NAME }}">{{ data.TRAINEE_NAME }}</td>
+            <td class="data" title="{{ data.Mail_Id }}">{{ data.REVIEWER_NAME }}</td>
+            <td class="data" title="{{ data.Mail_Id }}">{{ data.TECHNOLOGY }}</td>
+            <td class="data" title="{{ data.College }}">{{ data.TN_TEAM }}</td>
+            <td class="data" title="{{ data.Practice }}">{{ data.REVIEW_TYPE }}</td>
+            <td class="data" title="{{ data.Date_of_Joining }}">{{ data.REVIEW_DATE }}</td>
+            <td class="data">
+              <button type="button" (click)="deleteMember(i)"><i class="ph ph-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Individual Trainee Details -->
+<div class="showTraineeDetails" *ngIf="showTraineeList">
+  <div class="inner-TraineeDetails">
+    <div class="inner-TNmanagement">
+      <h2>Edit Score</h2>
+    </div>
+    <div class="inner-TNmanagement">
+      <button type="button" (click)="showTraineeDetails(-1)"><i class="ph ph-rewind"></i>Back</button>
+    </div>
+  </div>
+  <div class="inner-TraineeDetails">
+    <div class="TraineeDetails">
+      <table>
+        <thead>
+          <tr>
+            <th>Topic</th>
+            <th>Objective</th>
+            <th>Weightage</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody class="scroll-content-2" style="max-height: 360px; overflow-y: auto;">
+          <tr>
+            <td><label>Technology</label></td>
+            <td><p>{{ traineeDetail.TECHNOLOGY }}</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><label>Reviewer Name</label></td>
+            <td><p>{{ traineeDetail.REVIEWER_NAME }}</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><label>Trainee Name</label></td>
+            <td><p>{{ traineeDetail.TRAINEE_NAME }}</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><label>Mentor Name</label></td>
+            <td><p>{{ traineeDetail.MENTOR_NAME }}</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><label>TN Team</label></td>
+            <td><p>{{ traineeDetail.TN_TEAM }}</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr *ngFor="let question of filteredQuestionBank; let ind = index">
+            <td><label>{{ question.TOPIC }}</label></td>
+            <td><p>{{ question.OBJECTIVE }}</p></td>
+            <td><p>{{ question.WEIGHTAGE }}</p></td>
+            <td>
+              <input type="number" [id]="'score' + ind" value="0" min="0" />
+            </td>
+          </tr>
+          <tr>
+            <td><label>Overall Score</label></td>
+            <td><p>{{ traineeDetail.OVERALL_SCORE }}</p></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><button type="button" (click)="showTraineeDetails(-1)">Cancel</button></td>
+            <td></td>
+            <td></td>
+            <td><button type="button" (click)="saveScore()">Submit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Upload File Form -->
+<div class="Member-Management" *ngIf="showUploadFile">
+  <div class="inner-Membermanagement">
+    <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <h2>Upload File</h2>
+        </div>
+        <div class="inner-formcontrols" (click)="showFileUpload()">
+          <i class="ph ph-x"></i>
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols fileUpload">
+          <input type="file" placeholder="Excel File" formControlName="fileUpload" (change)="onFileChange($event)" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <button type="button" (click)="clearForm()"><i class="ph ph-prohibit"></i> Cancel</button>
+        </div>
+        <div class="inner-formcontrols">
+          <button type="submit" [disabled]="!uploadForm.valid">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
