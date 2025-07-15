@@ -1,189 +1,324 @@
-<div class="TN-management" *ngIf="!showTraineeList">
-  <div class="inner-TNmanagement">
-    <h2>Review - Individual</h2>
+<div class="container my-4" *ngIf="!showTraineeList">
+  <!-- Title -->
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h2 class="h4 mb-0">Review - Individual</h2>
   </div>
-  <div class="inner-TNmanagement">
-    <h4>Review - Individual</h4>
+
+  <!-- Search and Buttons -->
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <!-- Search -->
+    <div class="d-flex align-items-center bg-white rounded px-2" style="padding: 0.25rem;">
+     <i class="ph ph-magnifying-glass text-muted fs-5 me-2"></i>
+     <form [formGroup]="KeywordForm" class="mb-0">
+      <input
+        type="text"
+        placeholder="Search by Keyword"
+        class="form-control form-control-sm border-0 shadow-none"
+        formControlName="filterByKeyword" />
+     </form>
+    </div>
+
+    <!-- Functional Buttons -->
+    <div class="d-flex flex-wrap gap-2">
+    <button
+      type="button"
+      *ngIf="TNData.length < 10"
+      class="btn btn-outline-secondary btn-sm"
+      style="padding: 0.3rem;">
+      Employees: 0{{ TNData.length }}
+    </button>
+    <button
+      type="button"
+      *ngIf="TNData.length >= 10"
+      class="btn btn-outline-secondary btn-sm"
+      style="padding: 8px">
+      Employees: {{ TNData.length }}
+    </button>
+    <button
+      type="button"
+      (click)="downloadTable()"
+      class="btn btn-outline-secondary btn-sm"
+      style="padding: 8px">
+      <i class="ph ph-download-simple"></i>
+    </button>
+    <button
+      type="button"
+      (click)="deleteAllMembers()"
+      class="btn btn-outline-secondary btn-sm"
+      style="padding: 8px">
+      <i class="ph ph-trash"></i>
+    </button>
+    <button
+        type="button"
+        (click)="showFileUpload()"
+        class="btn btn-sm d-flex align-items-center gap-1 text-white"
+        style="background-color: #8347ad; border-color: #8347ad;padding: 8px;">
+        <i class="ph ph-paperclip"></i> Upload Files
+    </button>
   </div>
-  <div class="inner-TNmanagement">
-    <div class="inner-contents">
-      <i class="ph ph-magnifying-glass"></i>
-      <form [formGroup]="KeywordForm">
-        <input
-          type="text"
-          placeholder="Search by Keyword"
-          formControlName="filterByKeyword"
-        />
+  </div>
+</div>
+
+<div class="container my-3">
+  <div
+    class="table-responsive"
+    style="
+      max-height: calc(60px * 5); 
+      overflow-y: auto;
+      border: 1px solid #dee2e6;
+    ">
+    <table class="table table-hover mb-0">
+      <thead class="table-light sticky-top custom-header">
+        <tr>
+          <th scope="col">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              style="border-color: grey;"
+              id="parentCheckBox"
+              (change)="clickAllCheckBoxes()"/>
+          </th>
+          <th scope="col">Trainee ID <i class="ph ph-funnel-simple"></i></th>
+          <th scope="col">Trainee Name <i class="ph ph-funnel-simple"></i></th>
+          <th scope="col">Reviewer Name <i class="ph ph-funnel-simple"></i></th>
+          <th scope="col">Technology <i class="ph ph-funnel-simple"></i></th>
+          <th scope="col">Review Type <i class="ph ph-funnel-simple"></i></th>
+          <th scope="col">Review Date <i class="ph ph-funnel-simple"></i></th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="TNData.length === 0">
+          <td colspan="8" class="text-center text-muted">
+            No Data Found
+          </td>
+        </tr>
+        <tr
+          *ngFor="let data of TNData; let i = index"
+          style="height: 60px;">
+          <td>
+            <input
+              type="checkbox"
+              style="border-color: grey;"
+              class="form-check-input"
+              [id]="'checkbox' + i"/>
+          </td>
+          <td
+            (click)="showTraineeDetails(i, data)"
+            style="cursor: pointer; color:#8347ad">
+            {{ data.TRAINEE_ID }}
+          </td>
+          <td>{{ data.TRAINEE_NAME }}</td>
+          <td>{{ data.REVIEWER_NAME }}</td>
+          <td>{{ data.TECHNOLOGY }}</td>
+          <td>{{ data.REVIEW_TYPE }}</td>
+          <td>{{ data.REVIEW_DATE | date: 'dd-MM-yyyy' }}</td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <button
+                type="button"
+                class="btn btn-link p-0 text-secondary"
+                (click)="editMember(i)">
+                <i class="ph ph-pencil-simple"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-link p-0 text-dark"
+                (click)="deleteMember(i)">
+                <i class="ph ph-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="container my-4" *ngIf="showTraineeList">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 mb-0">Review Report - Individual</h2>
+    <button
+      type="button"
+      class="btn btn-outline-secondary d-flex align-items-center gap-1"
+      (click)="showTraineeDetails(-1, '')">
+      <i class="ph ph-rewind"></i> Back
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">Topic</th>
+          <th scope="col">Objective</th>
+          <th scope="col">Weightage</th>
+          <th scope="col">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fw-bold text-secondary">Technology</td>
+          <td>{{ traineeDetail.TECHNOLOGY }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="fw-bold text-secondary">Reviewer Name</td>
+          <td>{{ traineeDetail.REVIEWER_NAME }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="fw-bold text-secondary">Trainee Name</td>
+          <td>{{ traineeDetail.TRAINEE_NAME }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="fw-bold text-secondary">Mentor Name</td>
+          <td>{{ traineeDetail.MENTOR_NAME }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="fw-bold text-secondary">TN Team</td>
+          <td>{{ traineeDetail.TN_TEAM }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr *ngFor="let question of filteredQuestionBank; let i = index">
+          <td class="fw-bold">{{ question.TOPIC }}</td>
+          <td>{{ question.OBJECTIVE }}</td>
+          <td>{{ question.WEIGHTAGE }}</td>
+          <td>{{ traineeDetail.MARKS_LIST[i] }}</td>
+        </tr>
+        <tr>
+          <td class="fw-bold text-secondary">Overall Score</td>
+          <td>{{ traineeDetail.OVERALL_SCORE }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="fw-bold text-secondary">Overall Performance</td>
+          <td>{{ traineeDetail.OVERALL_PERFORMANCE }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal show fade d-block"
+  tabindex="-1"
+  role="dialog"
+  *ngIf="showUploadFile">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Upload File</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="showFileUpload()"></button>
+      </div>
+
+      <!-- Body -->
+      <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="fileUpload" class="form-label">Select Excel File</label>
+            <input
+              type="file"
+              id="fileUpload"
+              class="form-control"
+              formControlName="fileUpload"
+              (change)="onFileChange($event)" />
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn"
+            style="color: #8347ad; background-color: white; border-color:#8347ad;;"
+            (click)="clearForm()">
+            <i class="ph ph-prohibit"></i> Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn"
+            style="background-color: #8347ad;color:white"
+            [disabled]="!uploadForm.valid">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
-
-    <div class="inner-contents">
-      <div class="inner-functionalites">
-        <div class="function-buttons">
-          <button type="button" *ngIf="TNData.length < 10"> Employees : 0{{TNData.length}}</button>
-          <button type="button" *ngIf="TNData.length >= 10"> Employees : {{TNData.length}}</button>
-        </div>
-        <div class="function-buttons">
-          <button type="button" (click)="downloadTable()"><i class="ph ph-download-simple"></i></button>
-        </div>
-        <div class="function-buttons">
-          <button type="button" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
-        </div>
-      </div>
-      <div class="inner-functionalites">
-        <div class="functionality-buttons">
-          <button type="button" (click)="showFileUpload()"><i class="ph ph-paperclip"></i> Upload Files</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="inner-TNmanagement">
-    <div class="scroll-content" style="overflow:auto; max-height:400px;">
-      <table>
-        <thead>
-          <tr class="table-header">
-            <th>
-              <input type="checkbox" id="parentCheckBox" (change)="clickAllCheckBoxes()" />
-            </th>
-            <th class="data">Trainee ID <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Trainee Name <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Reviewer Name <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Technology <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Review Type <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Review Date <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Action <i class="ph ph-funnel-simple"></i></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngIf="TNData.length === 0" class="nodata">
-            <td colspan="8">No Data Found</td>
-          </tr>
-          <tr *ngFor="let data of TNData; let i = index" class="table-data">
-            <td>
-              <input type="checkbox" [id]="'checkbox' + i" />
-            </td>
-            <td class="data" title="{{ data.ACE_ID }}" (click)="showTraineeDetails(i, data)">{{ data.TRAINEE_ID }}</td>
-            <td class="data" title="{{ data.NAME }}">{{ data.TRAINEE_NAME }}</td>
-            <td class="data" title="{{ data.Mail_Id }}">{{ data.REVIEWER_NAME }}</td>
-            <td class="data" title="{{ data.Mail_Id }}">{{ data.TECHNOLOGY }}</td>
-            <td class="data" title="{{ data.Practice }}">{{ data.REVIEW_TYPE }}</td>
-            <td class="data" title="{{ data.Date_of_Joining }}">{{ data.REVIEW_DATE | date:'dd/mm/yyyy' }}</td>
-            <td class="data">
-              <button type="button" (click)="editMember(i)"><i class="ph ph-pencil-simple"></i></button>
-              <button type="button" (click)="deleteMember(i)"><i class="ph ph-trash"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </div>
+<!-- Edit Member Modal -->
+<div
+  class="modal fade show d-block"
+  tabindex="-1"
+  role="dialog"
+  *ngIf="showEditMember"
+  style="background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Member</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="showEdit()"></button>
+      </div>
 
-<!-- Individual Trainee Details -->
-<div class="showTraineeDetails" *ngIf="showTraineeList">
-  <div class="inner-TraineeDetails">
-    <div class="inner-TNmanagement">
-      <h2>Review Report - Individual</h2>
-    </div>
-    <div class="inner-TNmanagement">
-      <button type="button" (click)="showTraineeDetails(-1, '')"><i class="ph ph-rewind"></i>Back</button>
-    </div>
-  </div>
-  <div class="inner-TraineeDetails">
-    <div class="TraineeDetails">
-      <table>
-        <tbody>
-          <tr>
-            <th>Topic</th>
-            <th>Objective</th>
-            <th>Weightage</th>
-            <th>Score</th>
-          </tr>
-          <tr>
-            <td><label>Technology</label></td>
-            <td><p>{{ traineeDetail.TECHNOLOGY }}</p></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><label>Reviewer Name</label></td>
-            <td><p>{{ traineeDetail.REVIEWER_NAME }}</p></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><label>Trainee Name</label></td>
-            <td><p>{{ traineeDetail.TRAINEE_NAME }}</p></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><label>Mentor Name</label></td>
-            <td><p>{{ traineeDetail.MENTOR_NAME }}</p></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><label>TN Team</label></td>
-            <td><p>{{ traineeDetail.TN_TEAM }}</p></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr *ngFor="let question of filteredQuestionBank; let i = index">
-            <td><label>{{ question.TOPIC }}</label></td>
-            <td><p>{{ question.OBJECTIVE }}</p></td>
-            <td><p>{{ question.WEIGHTAGE }}</p></td>
-            <td><p>{{ traineeDetail.MARKS_LIST[i] }}</p></td>
-          </tr>
-          <tr>
-            <td><label>Overall Score</label></td>
-            <td><p>{{ traineeDetail.OVERALL_SCORE }}</p></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><label>Overall Performance</label></td>
-            <td><p>{{ traineeDetail.OVERALL_PERFORMANCE }}</p></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+      <!-- Modal Body -->
+      <form [formGroup]="editMemberForm" (ngSubmit)="EditedMemberDetails(editMemberForm.value)">
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="ACE ID" formControlName="ACE_ID" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="First Name" formControlName="First_Name" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Last Name" formControlName="Last_Name" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Designation" formControlName="Designation" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Team" formControlName="Team" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Practice" formControlName="Practice" />
+            </div>
+          </div>
+        </div>
 
-<!-- Upload File Form -->
-<div class="Member-Management" *ngIf="showUploadFile">
-  <div class="inner-Membermanagement">
-    <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <h2>Upload File</h2>
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" (click)="clearForm(); showEdit();">
+            <i class="ph ph-prohibit"></i> Cancel
+          </button>
+          <button type="submit" class="btn text-white" style="background-color: #8347ad;" [disabled]="editMemberForm.valid">
+            Submit
+          </button>
         </div>
-        <div class="inner-formcontrols" (click)="showFileUpload()">
-          <i class="ph ph-x"></i>
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols fileUpload">
-          <input
-            type="file"
-            placeholder="Excel File"
-            formControlName="fileUpload"
-            (change)="onFileChange($event)"
-          />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <button type="button" (click)="clearForm()"><i class="ph ph-prohibit"></i> Cancel</button>
-        </div>
-        <div class="inner-formcontrols">
-          <button type="submit" [disabled]="!uploadForm.valid">Submit</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

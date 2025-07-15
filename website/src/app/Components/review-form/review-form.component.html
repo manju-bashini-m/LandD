@@ -1,92 +1,94 @@
-
-<div class="TN-management">
-  <div class="inner-TNmanagement">
-    <h2>Review - Form</h2>
+<div class="container my-5">
+  <div class="mb-3">
+    <h2 class="fw-medium fs-3">Review - Form</h2>
   </div>
-  <div class="inner-TNmanagement">
-    <h4>Review - Form</h4>
+  <div class="mb-4">
   </div>
-  <div class="inner-TNmanagement">
+  <div class="bg-white p-4 rounded shadow-sm">
     <form [formGroup]="reviewForm" (ngSubmit)="reviewFormDetails(reviewForm.value)">
-      <div class="form-controls">
-        <div class="inner-form-controls">
-          <label for="technicalTopic">Technical Topic</label>
-          <select id="technicalTopic" formControlName="technicalTopic">
+     
+      <div class="row g-3 mb-3">
+        <div class="col-md-4">
+          <!-- <label for="technicalTopic" class="form-label text-#8347ad">Technical Topic</label> -->
+           <label for="technicalTopic" class="form-label" style="color: #8347ad;">Technical Topic</label>
+ 
+          <select id="technicalTopic" class="form-select" formControlName="technicalTopic">
             <option value="" disabled selected>Select Technical Topic</option>
             <option value="Java">Java</option>
             <option value="Testing">Testing</option>
           </select>
         </div>
-        <div class="inner-form-controls">
-          <label for="reviewerName">Reviewer Name</label>
-          <input id="reviewerName" type="text" placeholder="Enter Reviewer Name" formControlName="reviewerName" />
+        <div class="col-md-4">
+          <label for="reviewerName" class="form-label" style="color: #8347ad;">Reviewer Name</label>
+          <input type="text" class="form-control" id="reviewerName" placeholder="Enter Reviewer Name" formControlName="reviewerName" />
         </div>
-        <div class="inner-form-controls">
-          <label for="reviewerID">Reviewer ID</label>
-          <input id="reviewerID" type="text" placeholder="Enter Reviewer ID" formControlName="reviewerID" />
+        <div class="col-md-4">
+          <label for="reviewerID" class="form-label text- --bs" style="color: #8347ad;">Reviewer ID</label>
+          <input type="text" class="form-control" id="reviewerID" placeholder="Enter Reviewer ID" formControlName="reviewerID" />
         </div>
       </div>
-
-      <div class="form-controls">
-        <div class="inner-form-controls">
-          <label for="nonTechnicalTopic">Non-Technical Topic</label>
-          <select id="nonTechnicalTopic" formControlName="nonTechnicalTopic">
+ 
+      <div class="row g-3 mb-3">
+        <div class="col-md-4">
+          <label for="nonTechnicalTopic" class="form-label" style="color: #8347ad;">Non-Technical Topic</label>
+          <select id="nonTechnicalTopic" class="form-select" formControlName="nonTechnicalTopic">
             <option value="" disabled selected>Select Non-Technical Topic</option>
             <option value="soft skills">Soft Skills</option>
           </select>
         </div>
-        <div class="inner-form-controls">
-          <label for="traineeName">Trainee Name</label>
-          <input id="traineeName" type="text" placeholder="Enter Trainee Name" formControlName="traineeName" />
+        <div class="col-md-4">
+          <label for="traineeName" class="form-label" style="color: #8347ad;">Trainee Name</label>
+          <input type="text" class="form-control" id="traineeName" placeholder="Enter Trainee Name" formControlName="traineeName" />
         </div>
-        <div class="inner-form-controls">
-          <label for="traineeID">Trainee ID</label>
-          <input id="traineeID" type="text" placeholder="Enter Trainee ID" formControlName="traineeID" />
+        <div class="col-md-4">
+          <label for="traineeID" class="form-label " style="color: #8347ad;">Trainee ID</label>
+          <input type="text" class="form-control" id="traineeID" placeholder="Enter Trainee ID" formControlName="traineeID" />
         </div>
       </div>
-
-      <div class="form-controls">
-        <div class="inner-form-controls">
-          <label for="reviewType">Review Type</label>
-          <select id="reviewType" formControlName="reviewType">
+ 
+      <div class="row g-3 mb-3">
+        <div class="col-md-4">
+          <label for="reviewType" class="form-label" style="color: #8347ad;">Review Type</label>
+          <select id="reviewType" class="form-select" formControlName="reviewType">
             <option value="" disabled selected>Select Review Type</option>
             <option value="TN Review">TN Review</option>
             <option value="SL Review">SL Review</option>
           </select>
         </div>
-        <div class="inner-form-controls">
-          <label for="mentorName">Mentor Name</label>
-          <input id="mentorName" type="text" placeholder="Enter Mentor Name" formControlName="mentorName" />
+        <div class="col-md-4">
+          <label for="mentorName" class="form-label" style="color: #8347ad;">Mentor Name</label>
+          <input type="text" class="form-control" id="mentorName" placeholder="Enter Mentor Name" formControlName="mentorName" />
         </div>
-        <div class="inner-form-controls">
-          <label for="mentorID">Mentor ID</label>
-          <input id="mentorID" type="text" placeholder="Enter Mentor ID" formControlName="mentorID" />
-        </div>
-      </div>
-
-      <div class="form-controls">
-        <div class="inner-form-controls">
-          <label for="reviewDate">Review Date</label>
-          <input id="reviewDate" type="date" placeholder="Select Review Date" formControlName="reviewDate" />
-        </div>
-        <div class="inner-form-controls">
-          <label for="TNTeam">TN Team</label>
-          <input id="TNTeam" type="text" placeholder="Enter TN Team" formControlName="TNTeam" />
-        </div>
-        <div class="inner-form-controls">
-          <label for="TNTeamID">TN Team ID</label>
-          <input id="TNTeamID" type="text" placeholder="Enter TN Team ID" formControlName="TNTeamID" />
+        <div class="col-md-4">
+          <label for="mentorID" class="form-label " style="color: #8347ad;">Mentor ID</label>
+          <input type="text" class="form-control" id="mentorID" placeholder="Enter Mentor ID" formControlName="mentorID" />
         </div>
       </div>
-
-      <div class="form-controls">
-        <div class="inner-form-controls">
-          <button type="button" (click)="reviewForm.reset()">Cancel</button>
+ 
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <label for="reviewDate" class="form-label " style="color: #8347ad;">Review Date</label>
+          <input type="date" class="form-control" id="reviewDate" formControlName="reviewDate" />
         </div>
-        <div class="inner-form-controls">
-          <button type="submit" [disabled]="!reviewForm.valid">Submit</button>
+        <div class="col-md-4">
+          <label for="TNTeam" class="form-label" style="color: #8347ad;">TN Team</label>
+          <input type="text" class="form-control" id="TNTeam" placeholder="Enter TN Team" formControlName="TNTeam" />
+        </div>
+        <div class="col-md-4">
+          <label for="TNTeamID" class="form-label" style="color: #8347ad;">TN Team ID</label>
+          <input type="text" class="form-control" id="TNTeamID" placeholder="Enter TN Team ID" formControlName="TNTeamID" />
         </div>
       </div>
+ 
+      <div class="row g-3">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-outline w-100" (click)="reviewForm.reset()">Cancel</button>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn text-white w-100" style="background-color: #8347ad; border-color: #9C6FE4;" [disabled]="!reviewForm.valid">Submit</button>
+        </div>
+      </div>
+     
     </form>
   </div>
 </div>

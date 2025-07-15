@@ -1,4 +1,4 @@
-:host{
+/* :host{
     --primary-color: #ffff;
     --secondary-color: #9C6FE4;
     --tertiary-color:#757575;
@@ -99,4 +99,25 @@ input:focus{
     width: 100px;
     border-radius: 10px;
     cursor: pointer;
+} */
+
+:root {
+  --bs-primary: #9C6FE4;
+  --bs-light: #FAF8FE;
+}
+.text-primary {
+  color: var(--bs-primary) !important;
+}
+.btn-outline-primary {
+  color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+.btn-outline-primary:hover {
+  background-color: var(--bs-primary);
+  color: white;
+}
+::ng-deep .form-control:focus,
+::ng-deep .form-select:focus {
+  border-color: #8347ad;
+  box-shadow: 0 0 0 0.2rem rgba(131, 71, 173, 0.25);
 }

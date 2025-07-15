@@ -1,4 +1,4 @@
-:host{
+/* :host{
     --primary-color: #ffff;
     --secondary-color: #9C6FE4;
     --tertiary-color:#757575;
@@ -502,4 +502,76 @@ form{
     display: flex;
     justify-content: center;
     align-items: center;
+} */
+
+.modal-backdrop.show {
+  opacity: 0.5;
+}
+
+.table > tbody > tr > td {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.table-responsive::-webkit-scrollbar {
+  width: 6px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #8347ad;
+  border-radius: 4px;
+}
+.table-responsive::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.custom-header th {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  vertical-align: middle;
+}
+/* Buttons hover styles */
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  background-color: #8347ad !important;
+  color: white !important;
+  border-color: #8347ad !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #c99ee8;
+  color: white;
+}
+
+/* Buttons hover styles */
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  background-color: #8347ad !important;
+  color: white !important;
+  border-color: #8347ad !important;
+}
+
+/* Table row hover */
+.table-hover tbody tr:hover {
+  background-color: #8347ad;
+  color: white;
+}
+
+/* Optional: keep text inside buttons white on hover */
+.btn-outline-secondary:hover i,
+.btn-outline-secondary:focus i {
+  color: white !important;
+}
+
+.container {
+  background-color:#e4e4e4 ;
+  border-radius: 0.5rem;
+  /* padding: 1rem; */
+}
+button.btn-outline-secondary.btn-sm:hover {
+  background-color: #8347ad !important;
+  color: white !important;
+  border-color: #8347ad !important;
+}
+button.btn-outline-secondary.btn-sm{
+    background-color: white;
+    border: none;
 }
