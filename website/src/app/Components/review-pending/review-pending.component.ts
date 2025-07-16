@@ -170,8 +170,10 @@ export class ReviewPendingComponent {
     this.showEdit();
   }
 
+  // To delete All the members
   deleteAllMembers(): void {
     const parentCheckbox = document.getElementById('parentCheckBox') as HTMLInputElement | null;
+    console.log("Deleting all members!")
     if (!parentCheckbox) return;
 
     if (parentCheckbox.checked) {
@@ -184,7 +186,7 @@ export class ReviewPendingComponent {
     } else {
       let checkedIndex = 0;
       for (let i = 0; i < this.reviewDetails.length; i++) {
-        const checkbox = document.getElementById(`checkbox${i}`) as HTMLInputElement | null;
+        const checkbox = document.getElementById('checkbox' + i) as HTMLInputElement | null;
         if (checkbox && checkbox.checked) {
           this.deleteMember(i);
           checkedIndex++;

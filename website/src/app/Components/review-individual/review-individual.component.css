@@ -528,13 +528,6 @@ form{
   padding-bottom: 1rem;
   vertical-align: middle;
 }
-/* Buttons hover styles */
-.btn-outline-secondary:hover,
-.btn-outline-secondary:focus {
-  background-color: #8347ad !important;
-  color: white !important;
-  border-color: #8347ad !important;
-}
 
 .table-hover tbody tr:hover {
   background-color: #c99ee8;
@@ -542,8 +535,7 @@ form{
 }
 
 /* Buttons hover styles */
-.btn-outline-secondary:hover,
-.btn-outline-secondary:focus {
+.btn-outline-secondary:hover{
   background-color: #8347ad !important;
   color: white !important;
   border-color: #8347ad !important;
@@ -556,8 +548,7 @@ form{
 }
 
 /* Optional: keep text inside buttons white on hover */
-.btn-outline-secondary:hover i,
-.btn-outline-secondary:focus i {
+.btn-outline-secondary:hover i{
   color: white !important;
 }
 

@@ -1,4 +1,4 @@
-:host{
+/* :host{
     --primary-color: #ffff;
     --secondary-color: #9C6FE4;
     --tertiary-color:#757575;
@@ -473,4 +473,29 @@ form{
 }
 .inner-TraineeDetails table tr td:nth-child(3){
     width: 400px;
+} */
+
+.btn-hover-purple {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn-hover-purple:hover {
+  background-color: #8347ad !important;
+  color: white !important;
+}
+/* Custom scrollbar styles */
+.table-responsive::-webkit-scrollbar {
+  width: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #8347ad;
+  border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background-color: transparent;
 }
