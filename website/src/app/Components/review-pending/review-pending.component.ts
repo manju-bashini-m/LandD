@@ -304,4 +304,18 @@ export class ReviewPendingComponent {
       }
     });
   }
+
+  downloadTable() {
+  this.traineeDetailsService.downloadExcel().subscribe((blob: Blob) => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'excel-data.xlsx';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }, error => {
+    console.error('Download error:', error);
+  });
+}
+
 }

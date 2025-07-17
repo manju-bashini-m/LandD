@@ -1,0 +1,149 @@
+<!-- QUESTION BANK MAIN VIEW -->
+<div class="TN-management" *ngIf="!showTraineeList">
+  <div class="inner-TNmanagement">
+    <h2>Question Bank</h2>
+  </div>
+  <div class="inner-TNmanagement">
+    <h4>Question Bank</h4>
+  </div>
+  <div class="inner-TNmanagement">
+    <div class="inner-contents">
+      <i class="ph ph-magnifying-glass"></i>
+      <form [formGroup]="KeywordForm">
+        <input type="text" placeholder="Search by Keyword" formControlName="filterByKeyword"/>
+      </form>
+    </div>
+    <div class="inner-contents">
+      <div class="inner-functionalites">
+        <div class="function-buttons">
+          <button type="button">
+            Questions : {{questionBank.length < 10 ? '0' + questionBank.length : questionBank.length}}
+          </button>
+        </div>
+        <div class="function-buttons">
+          <button type="button"><i class="ph ph-download-simple"></i></button>
+        </div>
+        <div class="function-buttons">
+          <button type="button" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
+        </div>
+      </div>
+      <div class="inner-functionalites">
+        <div class="functionality-buttons">
+          <button type="button" (click)="showQuestion()"><i class="ph ph-plus"></i> Add Question</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="inner-TNmanagement">
+    <table>
+      <tr class="table-header">
+        <th (click)="clickAllCheckBoxes()"><input type="checkbox" id="parentCheckBox"></th>
+        <th class="data">Technology <i class="ph ph-funnel-simple"></i></th>
+        <th class="data">Topic <i class="ph ph-funnel-simple"></i></th>
+        <th class="data">Objective <i class="ph ph-funnel-simple"></i></th>
+        <th class="data">Weightage <i class="ph ph-funnel-simple"></i></th>
+        <th class="data">Action <i class="ph ph-funnel-simple"></i></th>
+      </tr>
+      <tr *ngIf="questionBank.length == 0" class="nodata">
+        <td colspan="6"> No Data Found</td>
+      </tr>
+      <tr class="table-data" *ngFor="let question of questionBank; let i=index">
+        <td><input type="checkbox" [id]="'checkbox'+i"></td>
+        <td class="data" [attr.title]="question.TECHNOLOGY_NAME">{{question.TECHNOLOGY_NAME}}</td>
+        <td class="data" [attr.title]="question.TOPIC">{{question.TOPIC}}</td>
+        <td class="data" [attr.title]="question.OBJECTIVE">{{question.OBJECTIVE}}</td>
+        <td class="data" [attr.title]="question.WEIGHTAGE">{{question.WEIGHTAGE}}</td>
+        <td class="data">
+          <button type="button" (click)="showEditQuestion(i)"><i class="ph ph-pencil-simple"></i></button>
+          <button type="button" (click)="deleteQuestion(i)"><i class="ph ph-trash"></i></button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- EDIT QUESTION FORM -->
+<div class="Member-Management" *ngIf="showEditMember">
+  <div class="inner-Membermanagement">
+    <form [formGroup]="editQuestionForm" (ngSubmit)="editQuestion(editQuestionForm.value)">
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <h2>Edit Question</h2>
+        </div>
+        <div class="inner-formcontrols" (click)="showEdit()">
+          <i class="ph ph-x"></i>
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Objective" formControlName="OBJECTIVE" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Topic" formControlName="TOPIC" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <select formControlName="TECHNOLOGY_NAME">
+            <option value="" selected>Select the Technology</option>
+            <option *ngFor="let Technology of technologyArray" [value]="Technology">{{Technology}}</option>
+          </select>
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Weightage" formControlName="WEIGHTAGE" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <button type="button" (click)="showEdit()"><i class="ph ph-prohibit"></i> Cancel</button>
+        </div>
+        <div class="inner-formcontrols">
+          <button type="submit" [disabled]="!editQuestionForm.valid"> Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ADD QUESTION FORM -->
+<div class="Member-Management" *ngIf="showAddQuestion">
+  <div class="inner-Membermanagement">
+    <form [formGroup]="questionForm" (ngSubmit)="addQuestion(questionForm.value)">
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <h2>Add Question</h2>
+        </div>
+        <div class="inner-formcontrols" (click)="showQuestion()">
+          <i class="ph ph-x"></i>
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Objective" formControlName="OBJECTIVE" />
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Topic" formControlName="TOPIC" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <select formControlName="TECHNOLOGY_NAME">
+            <option value="" selected>Select the Technology</option>
+            <option *ngFor="let Technology of technologyArray" [value]="Technology">{{Technology}}</option>
+          </select>
+        </div>
+        <div class="inner-formcontrols">
+          <input type="text" placeholder="Weightage" formControlName="WEIGHTAGE" />
+        </div>
+      </div>
+      <div class="formcontrols">
+        <div class="inner-formcontrols">
+          <button type="button" (click)="showQuestion()"><i class="ph ph-prohibit"></i> Cancel</button>
+        </div>
+        <div class="inner-formcontrols">
+          <button type="submit" [disabled]="!questionForm.valid"><i class="ph ph-plus"></i> Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
