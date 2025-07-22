@@ -1,149 +1,205 @@
-<!-- QUESTION BANK MAIN VIEW -->
-<div class="TN-management" *ngIf="!showTraineeList">
-  <div class="inner-TNmanagement">
-    <h2>Question Bank</h2>
+<!-- 
+Team Name : L & D Interstellar
+Project Name : Code Dribble
+Started Date : 20-03-2025
+Expected End Date : 20-03-2025
+Description: This component is used to review details of each individual.
+-->
+
+<!-- Main Question Bank View -->
+<div class="container-fluid py-4" style="background: #FAF8FE; min-height: 100vh;">
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <div class="rounded-3 p-4" style="background: #fff;">
+        <!-- Top: Title and breadcrumb -->
+        <div class="d-flex flex-column flex-md-row align-items-md-center mb-3 gap-1">
+          <div class="me-auto">
+            <h2 class="fw-semibold mb-1" style="font-size:1.5rem;">Question Bank</h2>
+          </div>
+        </div>
+
+        <!-- Search and Actions Row -->
+        <div class="d-flex flex-wrap align-items-center mb-3 gap-3">
+          <div class="flex-grow-1" style="max-width: 320px;">
+            <div [formGroup]="KeywordForm">
+              <div class="input-group">
+                <span class="input-group-text bg-white border-0 pe-1" style="font-size:1.17rem;">
+                  <i class="ph ph-magnifying-glass" style="color:#757575;"></i>
+                </span>
+                <input type="text" class="form-control border-0 shadow-none text-secondary"
+                  placeholder="Search by Keyword" formControlName="filterByKeyword"
+                  style="background: #FAF8FE;"/>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center ms-auto gap-2">
+            <button type="button" id="btn-to-hover" class="btn btn-outline-secondary btn-sm btn-hover-purple"
+                    style="background-color: white; padding:8px; border:none; color:black">
+              Questions: {{questionBank.length < 10 ? '0' + questionBank.length : questionBank.length}}
+            </button>
+            <button type="button" id="btn-to-hover" class="btn btn-outline-secondary btn-sm"
+                    style="background-color: white; padding:8px; border:none; color:black" title="Download">
+              <i class="ph ph-download-simple"></i>
+            </button>
+            <button type="button" id="btn-to-hover" class="btn btn-outline-secondary btn-sm"
+                    style="background-color: white; padding:8px; border:none; color:black"
+                    (click)="deleteAllMembers()" title="Delete All">
+              <i class="ph ph-trash"></i>
+            </button>
+            <button type="button" class="btn"
+                    style="background: #8347ad; color: #fff; font-weight: 500; border-radius: 8px;"
+                    (click)="showAddQuestion = true">
+              <i class="ph ph-plus"></i> Add Question
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+          <table class="table table-hover mb-0 align-middle">
+            <thead class="table-light sticky-top">
+              <tr  style="height: 60px;">
+                <th scope="col" style="width:44px;">
+                  <input type="checkbox" id="parentCheckBox" (click)="clickAllCheckBoxes()"/>
+                </th>
+                <th scope="col">Technology <i class="ph ph-funnel-simple"></i></th>
+                <th scope="col">Topic <i class="ph ph-funnel-simple"></i></th>
+                <th scope="col">Objective <i class="ph ph-funnel-simple"></i></th>
+                <th scope="col">Weightage <i class="ph ph-funnel-simple"></i></th>
+                <th scope="col">Action <i class="ph ph-funnel-simple"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="questionBank.length === 0" style="color:#757575; background: #fff;">
+                <td colspan="6" class="py-4 text-center">No Data Found</td>
+              </tr>
+              <tr *ngFor="let question of questionBank; let i = index" style="background: #fff;">
+                <td><input type="checkbox" [id]="'checkbox' + i"/></td>
+                <td class="text-truncate" [attr.title]="question.TECHNOLOGY_NAME" style="max-width:150px;">
+                  {{question.TECHNOLOGY_NAME}}
+                </td>
+                <td class="text-truncate" [attr.title]="question.TOPIC" style="max-width:200px;">
+                  {{question.TOPIC}}
+                </td>
+                <td class="text-truncate" [attr.title]="question.OBJECTIVE" style="max-width:220px;">
+                  {{question.OBJECTIVE}}
+                </td>
+                <td class="text-center" [attr.title]="question.WEIGHTAGE" style="width: 110px;">
+                  {{question.WEIGHTAGE}}
+                </td>
+                <td>
+                  <button type="button" class="btn btn-light btn-sm me-2 border-0 p-1"
+                          style="color: #757575;" (click)="showEditQuestion(i)">
+                    <i class="ph ph-pencil-simple"></i>
+                  </button>
+                  <button type="button" class="btn btn-light btn-sm border-0 p-1"
+                          style="color: #757575;" (click)="deleteQuestion(i)">
+                    <i class="ph ph-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="inner-TNmanagement">
-    <h4>Question Bank</h4>
-  </div>
-  <div class="inner-TNmanagement">
-    <div class="inner-contents">
-      <i class="ph ph-magnifying-glass"></i>
-      <form [formGroup]="KeywordForm">
-        <input type="text" placeholder="Search by Keyword" formControlName="filterByKeyword"/>
+</div>
+
+<!-- Edit Question Modal -->
+<div class="modal fade show d-block" *ngIf="showEditMember" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-3 p-4" style="background: #fff;">
+      <form [formGroup]="editQuestionForm">
+        <div class="d-flex justify-content-between mb-4">
+          <h2 class="fw-semibold mb-0">Edit Question</h2>
+          <button type="button" class="btn-close" (click)="showEditMember = false"></button>
+        </div>
+        <div class="row gy-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Objective</label>
+            <input type="text" class="form-control" placeholder="Objective" formControlName="OBJECTIVE" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Topic</label>
+            <input type="text" class="form-control" placeholder="Topic" formControlName="TOPIC" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Technology</label>
+            <select class="form-select" formControlName="TECHNOLOGY_NAME">
+              <option value="" selected>Select the Technology</option>
+              <option *ngFor="let tech of technologyArray" [value]="tech">{{tech}}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Weightage</label>
+            <input type="text" class="form-control" placeholder="Weightage" formControlName="WEIGHTAGE" />
+          </div>
+        </div>
+        <div class="d-flex gap-2 justify-content-end mt-3">
+          <button type="button" class="btn btn-outline-secondary" (click)="showEditMember = false">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!editQuestionForm.valid"
+                  (click)="editQuestion(editQuestionForm.value)">Submit</button>
+        </div>
       </form>
     </div>
-    <div class="inner-contents">
-      <div class="inner-functionalites">
-        <div class="function-buttons">
-          <button type="button">
-            Questions : {{questionBank.length < 10 ? '0' + questionBank.length : questionBank.length}}
+  </div>
+</div>
+<!-- Add Question Modal - Updated UI as per screenshot -->
+<div class="modal fade show d-block" *ngIf="showAddQuestion" style="background: rgba(0,0,0,0.5); z-index: 1050;">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 800px;">
+    <div class="modal-content rounded-3 p-4" style="background: #fff;">
+      <form [formGroup]="questionForm">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fw-semibold mb-0" style="font-size: 1.5rem;">Add Question</h3>
+          <button type="button" class="btn p-0 border-0 bg-transparent fs-3 lh-1"
+                  style="line-height: 1; color: #757575;"
+                  (click)="showAddQuestion = false" aria-label="Close">
+            &times;
           </button>
         </div>
-        <div class="function-buttons">
-          <button type="button"><i class="ph ph-download-simple"></i></button>
+        <!-- Two columns: Objective/Topic and Technology/Weightage -->
+        <div class="row g-3 mb-0">
+          <div class="col-md-6">
+            <input type="text" class="form-control"
+                   style="height:48px; font-size:1.05rem;"
+                   placeholder="Objective" formControlName="OBJECTIVE" />
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control"
+                   style="height:48px; font-size:1.05rem;"
+                   placeholder="Topic" formControlName="TOPIC" />
+          </div>
+          <div class="col-md-6">
+            <select class="form-select"
+                    style="height:48px; font-size:1.05rem; color:#757575;"
+                    formControlName="TECHNOLOGY_NAME">
+              <option value="" selected>Select The Technology</option>
+              <option *ngFor="let tech of technologyArray" [value]="tech">{{tech}}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control"
+                   style="height:48px; font-size:1.05rem;"
+                   placeholder="Weightage" formControlName="WEIGHTAGE" />
+          </div>
         </div>
-        <div class="function-buttons">
-          <button type="button" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
+        <div class="d-flex mt-4 gap-2 justify-content-end">
+          <button type="button"
+                  class="btn"
+                  style="border:1.5px solid #9C6FE4; color:#9C6FE4; background:transparent; border-radius:8px; min-width:100px; font-weight:500;"
+                  (click)="showAddQuestion = false">
+            <i class="ph ph-prohibit me-1"></i>Cancel
+          </button>
+          <button type="submit"
+                  class="btn"
+                  [disabled]="!questionForm.valid"
+                  (click)="addQuestion(questionForm.value)"
+                  style="background:#9C6FE4; color:white; border-radius:8px; min-width:100px; font-weight:500;">
+            <i class="ph ph-plus me-1"></i>Add
+          </button>
         </div>
-      </div>
-      <div class="inner-functionalites">
-        <div class="functionality-buttons">
-          <button type="button" (click)="showQuestion()"><i class="ph ph-plus"></i> Add Question</button>
-        </div>
-      </div>
+      </form>
     </div>
-  </div>
-  <div class="inner-TNmanagement">
-    <table>
-      <tr class="table-header">
-        <th (click)="clickAllCheckBoxes()"><input type="checkbox" id="parentCheckBox"></th>
-        <th class="data">Technology <i class="ph ph-funnel-simple"></i></th>
-        <th class="data">Topic <i class="ph ph-funnel-simple"></i></th>
-        <th class="data">Objective <i class="ph ph-funnel-simple"></i></th>
-        <th class="data">Weightage <i class="ph ph-funnel-simple"></i></th>
-        <th class="data">Action <i class="ph ph-funnel-simple"></i></th>
-      </tr>
-      <tr *ngIf="questionBank.length == 0" class="nodata">
-        <td colspan="6"> No Data Found</td>
-      </tr>
-      <tr class="table-data" *ngFor="let question of questionBank; let i=index">
-        <td><input type="checkbox" [id]="'checkbox'+i"></td>
-        <td class="data" [attr.title]="question.TECHNOLOGY_NAME">{{question.TECHNOLOGY_NAME}}</td>
-        <td class="data" [attr.title]="question.TOPIC">{{question.TOPIC}}</td>
-        <td class="data" [attr.title]="question.OBJECTIVE">{{question.OBJECTIVE}}</td>
-        <td class="data" [attr.title]="question.WEIGHTAGE">{{question.WEIGHTAGE}}</td>
-        <td class="data">
-          <button type="button" (click)="showEditQuestion(i)"><i class="ph ph-pencil-simple"></i></button>
-          <button type="button" (click)="deleteQuestion(i)"><i class="ph ph-trash"></i></button>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<!-- EDIT QUESTION FORM -->
-<div class="Member-Management" *ngIf="showEditMember">
-  <div class="inner-Membermanagement">
-    <form [formGroup]="editQuestionForm" (ngSubmit)="editQuestion(editQuestionForm.value)">
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <h2>Edit Question</h2>
-        </div>
-        <div class="inner-formcontrols" (click)="showEdit()">
-          <i class="ph ph-x"></i>
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Objective" formControlName="OBJECTIVE" />
-        </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Topic" formControlName="TOPIC" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <select formControlName="TECHNOLOGY_NAME">
-            <option value="" selected>Select the Technology</option>
-            <option *ngFor="let Technology of technologyArray" [value]="Technology">{{Technology}}</option>
-          </select>
-        </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Weightage" formControlName="WEIGHTAGE" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <button type="button" (click)="showEdit()"><i class="ph ph-prohibit"></i> Cancel</button>
-        </div>
-        <div class="inner-formcontrols">
-          <button type="submit" [disabled]="!editQuestionForm.valid"> Submit</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- ADD QUESTION FORM -->
-<div class="Member-Management" *ngIf="showAddQuestion">
-  <div class="inner-Membermanagement">
-    <form [formGroup]="questionForm" (ngSubmit)="addQuestion(questionForm.value)">
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <h2>Add Question</h2>
-        </div>
-        <div class="inner-formcontrols" (click)="showQuestion()">
-          <i class="ph ph-x"></i>
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Objective" formControlName="OBJECTIVE" />
-        </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Topic" formControlName="TOPIC" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <select formControlName="TECHNOLOGY_NAME">
-            <option value="" selected>Select the Technology</option>
-            <option *ngFor="let Technology of technologyArray" [value]="Technology">{{Technology}}</option>
-          </select>
-        </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Weightage" formControlName="WEIGHTAGE" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <button type="button" (click)="showQuestion()"><i class="ph ph-prohibit"></i> Cancel</button>
-        </div>
-        <div class="inner-formcontrols">
-          <button type="submit" [disabled]="!questionForm.valid"><i class="ph ph-plus"></i> Add</button>
-        </div>
-      </div>
-    </form>
   </div>
 </div>

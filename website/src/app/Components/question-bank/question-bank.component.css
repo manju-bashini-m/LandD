@@ -1,4 +1,4 @@
-:host{
+/* :host{
     --primary-color: #ffff;
     --secondary-color: #9C6FE4;
     --tertiary-color:#757575;
@@ -348,4 +348,43 @@ form{
     padding-left: 10px;
     text-transform: capitalize;
     color: var(--tertiary-color);
+} */
+
+.btn-hover-purple {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+#btn-to-hover:hover {
+  background-color: #8347ad !important;
+  color: white !important;
+}
+
+table.table td,
+table.table th {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.table-responsive {
+  max-height: 290px;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar styles */
+.table-responsive::-webkit-scrollbar {
+  width: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #8347ad;
+  border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+
+

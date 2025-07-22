@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TraineeDetailsService } from '../../Service/trainee-details.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -69,21 +70,22 @@ export class QuestionBankComponent {
     return Array.from(this.technologyList);
   }
 
+
   retrieveReviewDetails() {
-    this.traineeDetailsService.reviewDetails().subscribe((details: any[]) => {
-      this.reviewDetails = details;
-    });
-    this.traineeDetailsService.getQuestionBank().subscribe((details: any[]) => {
-      this.questionBank = details;
-      this.checkreviewDetails = [...details];
-    });
-    this.traineeDetailsService.impactTraineeDetails().subscribe((detail: any[]) => {
-      this.impactTraineeList = detail;
-    });
-    this.traineeDetailsService.internshipDetails().subscribe((detail: any[]) => {
-      this.internList = detail;
-    });
-  }
+  forkJoin([
+    this.traineeDetailsService.reviewDetails(),
+    this.traineeDetailsService.impactTraineeDetails(),
+    this.traineeDetailsService.internshipDetails(),
+    this.traineeDetailsService.getQuestionBank()
+  ]).subscribe(([review, impacts, interns, questions]) => {
+    this.reviewDetails = review;
+    this.impactTraineeList = impacts;
+    this.internList = interns;
+    this.questionBank = questions;
+    this.checkreviewDetails = [...questions];
+    this.allTechList(); // <-- Build list AFTER all data is loaded
+  });
+}
 
   allTechList() {
     this.employeeList = [...this.impactTraineeList, ...this.internList];
@@ -112,11 +114,11 @@ export class QuestionBankComponent {
     }
   }
 
-  deleteQuestion(index: number) {
-    if (confirm('Sure you want to remove ' + this.questionBank[index].TECHNOLOGY_NAME)) {
+   deleteQuestion(index:any){
+    if(confirm("sure you want to Remove "+this.questionBank[index].TECHNOLOGY_NAME)) {
       this.traineeDetailsService.deleteQuestion(this.questionBank[index]);
-      this.questionBank.splice(index, 1);
-      this.checkreviewDetails = [...this.questionBank];
+      this.questionBank.splice(index,1);
+      this.checkreviewDetails = this.questionBank;
     }
   }
 

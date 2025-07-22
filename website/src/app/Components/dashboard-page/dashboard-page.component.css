@@ -1,0 +1,33 @@
+:host {
+  --primary-color: #ffffff;
+  --secondary-color: #8347ad;
+  --tertiary-color: #757575;
+  --font-color: #1E1F24;
+  --header-color: #FAF8FE;
+}
+
+
+.TN-management h2 {
+  font-size: 1.8vw;
+  font-weight: 500;
+}
+
+.TN-management h4 {
+  font-size: 1vw;
+  color: var(--secondary-color);
+  font-weight: 400;
+}
+
+.dashboard-contents h2,
+.dashboard-contents p {
+  color: var(--primary-color);
+}
+
+.countDetails h4 {
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
+.countDetails p {
+  color: var(--font-color);
+}

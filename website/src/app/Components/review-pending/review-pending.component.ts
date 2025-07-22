@@ -207,12 +207,23 @@ export class ReviewPendingComponent {
   }
 
   uploadFile(): void {
-    if (this.selectedFile) {
-      this.traineeDetailsService.reviewDetailsSendExcelFile(this.selectedFile);
-    } else {
-      alert('Please select a file before uploading.');
-    }
+  if (this.selectedFile) {
+    this.traineeDetailsService.reviewDetailsSendExcelFile(this.selectedFile).subscribe({
+      next: (res) => {
+        alert('File uploaded successfully.');
+        this.clearForm();       // Optional: resets form and file
+        this.showFileUpload();  // Optional: closes the modal
+      },
+      error: (err) => {
+        alert('Failed to upload file.');
+        console.error(err);
+      }
+    });
+  } else {
+    alert('Please select a file before uploading.');
   }
+}
+
 
   showTraineeDetails(index: number): void {
     this.filteredQuestionBank = [];
