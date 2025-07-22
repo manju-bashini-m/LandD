@@ -137,13 +137,21 @@ export class ReviewPendingComponent {
     }
   }
 
-  deleteMember(index: number): void {
-    if (confirm(`Are you sure you want to remove ${this.reviewDetails[index].NAME}?`)) {
-      this.traineeDetailsService.deleteReviewDetails(this.reviewDetails[index]);
-      this.reviewDetails.splice(index, 1);
-      this.checkreviewDetails = [...this.reviewDetails];
-    }
+ deleteMember(index: any) {
+  const trainee = this.reviewDetails[index];
+  if (confirm(`Are you sure you want to remove ${trainee.NAME}?`)) {
+    this.traineeDetailsService.deleteReviewDetails(trainee).subscribe({
+      next: () => {
+        this.reviewDetails.splice(index, 1);
+        this.checkreviewDetails = [...this.reviewDetails]; 
+      },
+      error: (err) => {
+        console.error('Failed to delete:', err);
+      }
+    });
   }
+}
+
 
   showEdit(): void {
     this.showEditMember = !this.showEditMember;
@@ -189,7 +197,7 @@ export class ReviewPendingComponent {
         const checkbox = document.getElementById('checkbox' + i) as HTMLInputElement | null;
         if (checkbox && checkbox.checked) {
           this.deleteMember(i);
-          checkedIndex++;
+          ++checkedIndex;
           checkbox.checked = false;
         }
       }

@@ -125,11 +125,18 @@ export class ReviewIndividualComponent {
     }
   }
 
-  deleteMember(index: number): void {
-    if (confirm(`Are you sure you want to remove ${this.TNData[index].NAME}?`)) {
-      this.traineeDetailsService.deleteReviewDetails(this.TNData[index]);
-      this.TNData.splice(index, 1);
-      this.checkTNData = [...this.TNData];
+  deleteMember(index: any) {
+    const trainee = this.TNData[index];
+    if (confirm(`Are you sure you want to remove ${trainee.NAME}?`)) {
+      this.traineeDetailsService.deleteReviewDetails(this.TNData[index]).subscribe({
+        next: () => {
+          this.TNData.splice(index, 1);
+          this.checkTNData = [...this.TNData];
+        },
+        error: (err) => {
+          console.error('Failed to delete:', err);
+        }
+      });
     }
   }
 
