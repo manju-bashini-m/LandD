@@ -13,7 +13,8 @@
 
   <div class="row">
     <div class="col-lg-6 col-12 mb-4">
-      <div class="dashboard-contents p-4 rounded-4 text-white" style="background-color: var(--secondary-color); height: 100%;">
+      <div class="dashboard-contents p-4 rounded-4 text-white"
+        style="background-color: var(--secondary-color); height: 100%;">
         <h2 class="fs-5 mb-3">Elevate Your Expertise Through Our Online Courses.</h2>
         <p class="fs-6 mb-3">
           Online courses and digital training to help you learn new skills or help you grow your career.
@@ -33,22 +34,34 @@
         <div class="col-sm-6">
           <div class="countDetails p-3 rounded-3 bg-white shadow-sm h-100">
             <h4 class="text-#8347ad fw-bold">Impact Trainees</h4>
-            <p class="text-dark">580</p>
+            <p class="text-dark">4580</p>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="countDetails p-3 rounded-3 bg-white shadow-sm h-100">
             <h4 class="text-#8347ad fw-bold">Internship</h4>
-            <p class="text-dark">80</p>
+            <p class="text-dark">680</p>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="countDetails p-3 rounded-3 bg-white shadow-sm h-100">
             <h4 class="text-#8347ad fw-bold">COE</h4>
-            <p class="text-dark">87</p>
+            <p class="text-dark">587</p>
           </div>
         </div>
       </div>
     </div>
+    <div class="row mt-5 container">
+      <div class="col-12">
+        <div class="bg-white p-4 rounded-4 shadow-sm">
+          <h4 class="mb-3" style="color: var(--secondary-color);">Overview Chart</h4>
+
+          <canvas baseChart [data]="barChartData" [type]="barChartType" [options]="barChartOptions">
+          </canvas>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
