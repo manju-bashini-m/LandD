@@ -5,7 +5,9 @@
   --font-color: #1E1F24;
   --header-color: #FAF8FE;
 }
-
+.TN-management{
+  margin-bottom: 50px;
+}
 
 .TN-management h2 {
   font-size: 1.8vw;
@@ -30,4 +32,16 @@
 
 .countDetails p {
   color: var(--font-color);
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+  padding: 20px;
+  margin-bottom: auto;
+}
+
+.container{
+  padding: 20px;
+  margin-bottom: auto;
 }
