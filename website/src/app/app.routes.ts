@@ -24,23 +24,54 @@ export const routes: Routes = [
                },
                {
                     path: "dashboard",
-                    component: DashboardPageComponent
+                    component: DashboardPageComponent,
+                    title:"Dashboard"
                },
                {
                     path: "tn-management",
-                    component: TnmanagementPageComponent
+                    component: TnmanagementPageComponent,
+                    title:"TN Management"
                },
-                {  path:"tn-management/TN_Structure",
-                        component: TnStructureComponent
-                },
-                {path:"reviewReports/reviewIndividual",component:ReviewIndividualComponent},
-                {path:"reviewReports/reviewPending",component:ReviewPendingComponent},
-                {path:"reviewReports/reviewTrainee",component:ReviewTraineeComponent},
-                {path:"reviewReports/reviewForm",component:ReviewFormComponent},
-                {path:"fresherManagement/impact-training",component:ImpactTrainingPageComponent},
-                {path:"fresherManagement/Internship",component:InternshipComponent},
-                {path:'tnmanagementPage',component:TnmanagementPageComponent},
-                {path:'reviewReports/questionBank',component:QuestionBankComponent},
+               {
+                    path:"tn-management/TN_Structure",
+                    component: TnStructureComponent,
+                    title:"TN Structure"
+               },
+               {
+                    path:"fresherManagement/impact-training",
+                    component:ImpactTrainingPageComponent,
+                    title:"Impact Training"
+               },
+               {
+                    path:"fresherManagement/Internship",
+                    component:InternshipComponent,
+                    title:"Internship"
+               },
+               {
+                    path:"reviewReports/reviewIndividual",
+                    component:ReviewIndividualComponent,
+                    title:"Review Individuals"
+               },
+               {
+                    path:"reviewReports/reviewPending",
+                    component:ReviewPendingComponent,
+                    title:"Review Pending"
+               },
+               {
+                    path:"reviewReports/reviewTrainee",
+                    component:ReviewTraineeComponent,
+                    title:"Review Trainee"
+               },
+               {
+                    path:"reviewReports/reviewForm",
+                    component:ReviewFormComponent,
+                    title:"Review Form"
+               },
+               {
+                    path:'reviewReports/questionBank',
+                    component:QuestionBankComponent,
+                    title:"Question Bank"
+               },
           ]
      },
 ];

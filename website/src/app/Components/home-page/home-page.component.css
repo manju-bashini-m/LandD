@@ -23,6 +23,7 @@
 
 .sidebar-contents {
   display: flex;
+  color: #8347ad;
   flex-direction: column;
   gap: 12px; /* Equal spacing between sidebar links */
   width: 75%;
@@ -92,8 +93,7 @@
   text-align: center;
 }
 
-.logout i,
-.logout a {
+.logout i {
   text-decoration: none;
   color: #8347ad;
   font-weight: 500;
