@@ -1,4 +1,4 @@
-<div class="container my-4" *ngIf="!showTraineeList">
+<div class="container my-3" *ngIf="!showTraineeList">
   <!-- Title -->
   <div class="d-flex justify-content-between align-items-center mb-2" >
     <h2 class="h4 mb-0">Review - Pending</h2>
@@ -57,9 +57,9 @@
 
   <!-- Table -->
 
-<div class="border table-responsive" style="max-height: 300px; overflow-y: auto;">
+<div  class="border table-responsive" style="max-height: 300px; overflow-y: auto;">
   <table class="table table-hover mb-0 align-middle">
-    <thead class="table-light sticky-top">
+    <thead style="font-size: 1vw;" class="table-light sticky-top">
       <tr style="height: 60px;">
         <th scope="col">
           <input type="checkbox" style="border: 1px solid grey;" id="parentCheckBox" class="form-check-input" (change)="clickAllCheckBoxes()" />
@@ -71,10 +71,10 @@
         <th scope="col">TN Team <i class="ph ph-funnel-simple"></i></th>
         <th scope="col">Review Type <i class="ph ph-funnel-simple"></i></th>
         <th scope="col">Review Date <i class="ph ph-funnel-simple"></i></th>
-        <th scope="col">Action</th>
+        <th scope="col">Action <i class="ph ph-funnel-simple"></i></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="font-size: 0.9vw;">
       <tr *ngIf="reviewDetails.length === 0">
         <td colspan="9" class="text-center text-muted py-3">No Data Found</td>
       </tr>
@@ -83,13 +83,13 @@
           <input type="checkbox" style="border: 1px solid grey;" class="form-check-input" [id]="'checkbox' + i" />
         </td>
         <td (click)="showTraineeDetails(i)" style="cursor: pointer; color:#8347ad">{{ data.TRAINEE_ID }}</td>
-        <td>{{ data.TRAINEE_NAME }}</td>
-        <td>{{ data.REVIEWER_NAME }}</td>
-        <td>{{ data.TECHNOLOGY }}</td>
-        <td>{{ data.TN_TEAM }}</td>
-        <td>{{ data.REVIEW_TYPE }}</td>
-        <td>{{ data.REVIEW_DATE | date: 'dd-MM-yyyy' }}</td>
-        <td>
+        <td class="data">{{ data.TRAINEE_NAME }}</td>
+        <td class="data">{{ data.REVIEWER_NAME }}</td>
+        <td class="data">{{ data.TECHNOLOGY }}</td>
+        <td class="data">{{ data.TN_TEAM }}</td>
+        <td class="data">{{ data.REVIEW_TYPE }}</td>
+        <td class="data">{{ data.REVIEW_DATE | date: 'dd-MM-yyyy' }}</td>
+        <td class="data">
           <button type="button" class="btn btn-link text-dark p-0" (click)="deleteMember(i)">
             <i class="ph ph-trash"></i>
           </button>

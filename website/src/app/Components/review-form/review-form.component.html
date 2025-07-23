@@ -1,13 +1,11 @@
-<div class="container my-5">
-  <div class="mb-3">
-    <h2 class="fw-medium fs-3">Review - Form</h2>
-  </div>
-  <div class="mb-4">
+<div class="container my-3">
+   <div class="d-flex justify-content-between align-items-center">
+    <h2 class="h4 mb-2">Review - Form</h2>
   </div>
   <div class="bg-white p-4 rounded shadow-sm">
-    <form [formGroup]="reviewForm" (ngSubmit)="reviewFormDetails(reviewForm.value)">
+    <form [formGroup]="reviewForm" (ngSubmit)="reviewFormDetails(reviewForm.value)" style="font-size: 1.2vw;">
      
-      <div class="row g-3 mb-3">
+      <div class="row g-3">
         <div class="col-md-4">
           <!-- <label for="technicalTopic" class="form-label text-#8347ad">Technical Topic</label> -->
            <label for="technicalTopic" class="form-label" style="color: #8347ad;">Technical Topic</label>

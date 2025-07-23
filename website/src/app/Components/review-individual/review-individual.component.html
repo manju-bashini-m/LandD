@@ -1,11 +1,11 @@
-<div class="container my-4" *ngIf="!showTraineeList">
+<div class="container my-3" *ngIf="!showTraineeList">
   <!-- Title -->
   <div class="d-flex justify-content-between align-items-center mb-2">
     <h2 class="h4 mb-0">Review - Individual</h2>
   </div>
 
   <!-- Search and Buttons -->
-  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-2">
     <!-- Search -->
     <div class="d-flex align-items-center bg-white rounded px-2" style="padding: 0.25rem;">
      <i class="ph ph-magnifying-glass text-muted fs-5 me-2"></i>
@@ -68,7 +68,7 @@
       border: 1px solid #dee2e6;
     ">
     <table class="table table-hover mb-0">
-      <thead class="table-light sticky-top custom-header">
+      <thead style="font-size: 1vw;" class="table-light sticky-top custom-header">
         <tr>
           <th scope="col">
             <input
@@ -84,10 +84,10 @@
           <th scope="col">Technology <i class="ph ph-funnel-simple"></i></th>
           <th scope="col">Review Type <i class="ph ph-funnel-simple"></i></th>
           <th scope="col">Review Date <i class="ph ph-funnel-simple"></i></th>
-          <th scope="col">Action</th>
+          <th scope="col">Action <i class="ph ph-funnel-simple"></i></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody style="font-size: 0.9vw;">
         <tr *ngIf="TNData.length === 0">
           <td colspan="8" class="text-center text-muted">
             No Data Found

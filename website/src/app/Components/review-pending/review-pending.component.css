@@ -540,3 +540,6 @@ table.table th {
   color: white !important;
   border-color: #8347ad !important;
 }
+.data:nth-child(8){
+    justify-content: center !important;
+}
