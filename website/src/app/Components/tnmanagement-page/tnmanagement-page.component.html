@@ -1,206 +1,220 @@
-<div class="TN-management">
-  <div class="inner-TNmanagement">
-    <h2>TN Management</h2>
+<div class="container-fluid TN-management py-3 py-md-4">
+  <div class="row mb-2 mb-md-3">
+    <div class="col">
+      <h4 class="mb-0">TN Management</h4>
+    </div>
   </div>
-  <div class="inner-TNmanagement">
-    <h4>TN Management</h4>
+
+  <div class="row mb-2 mb-md-3">
+    <div class="col">
+      <h6 class="text-purple mb-0">TN Management</h6>
+    </div>
   </div>
-  <div class="inner-TNmanagement">
-    <div class="inner-contents">
-      <i class="ph ph-magnifying-glass"></i>
-      <form [formGroup]="KeywordForm" (ngSubmit)="$event.preventDefault()">
-        <input
-          type="text"
-          placeholder="Search by Keyword"
-          formControlName="filterByKeyword"
-          (ngModelChange)="filterByKeyword = $event"
-        />
+
+  <div class="row mb-3 justify-content-between">
+    <div class="col-12 col-md-3 mb-2 mb-md-0">
+      <form [formGroup]="KeywordForm" class="input-group">
+        <span class="input-group-text bg-white border-end-0" style="border-color: #fff;">
+          <i class="ph ph-magnifying-glass"></i>
+        </span>
+        <input type="text" style="font-size: 0.8rem; outline: none;  box-shadow: none; border-color: #fff;"  class="form-control border-start-0" placeholder="Search by Keyword"
+          formControlName="filterByKeyword" (ngModelChange)="filterByKeyword = $event">
       </form>
     </div>
-    <div class="inner-contents">
-      <div class="inner-functionalites">
-        <div class="function-buttons">
-          <button type="button" *ngIf="TNData.length < 10">Employees : 0{{ TNData.length }}</button>
-          <button type="button" *ngIf="TNData.length >= 10">Employees : {{ TNData.length }}</button>
-        </div>
-        <div class="function-buttons">
-          <button type="button"><i class="ph ph-download-simple"></i></button>
-        </div>
-        <div class="function-buttons">
-          <button type="button" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
-        </div>
+
+    <div class="col-12 col-md-9 d-flex flex-wrap justify-content-md-end gap-2">
+      <div class="d-flex gap-2 me-md-3">
+        @if(TNData.length<10){ <button type="button" style="font-size: 0.8rem;"  class="btn btn-light">Employees : 0{{
+          TNData.length }}</button>
+          }
+          @if(TNData.length>=10){
+          <button type="button" style="font-size: 0.8rem;"  class="btn btn-light">Employees : {{ TNData.length
+            }}</button>
+          }
+          <button type="button" class="btn btn-light"><i class="ph ph-download-simple"></i></button>
+          <button type="button" class="btn btn-light" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
       </div>
-      <div class="inner-functionalites">
-        <div class="functionality-buttons">
-          <button type="button" (click)="showMember()"><i class="ph ph-plus"></i> Add Member</button>
-        </div>
-        <div class="functionality-buttons">
-          <button type="button" (click)="showFileUpload()"><i class="ph ph-paperclip"></i> Upload Files</button>
-        </div>
+
+      <div class="d-flex gap-2 mt-2 mt-md-0">
+        <button type="button" class="btn btn-purple" style="font-size: 0.8rem;" (click)="showMember()">
+          <i class="ph ph-plus"></i> <span class="d-none d-md-inline">Add Member</span>
+        </button>
+        <button type="button" class="btn btn-outline-purple" style="font-size: 0.8rem;" (click)="showFileUpload()">
+          <i class="ph ph-paperclip"></i> <span class="d-none d-md-inline">Upload Files</span>
+        </button>
+
       </div>
     </div>
   </div>
 
-  <div class="inner-TNmanagement">
-    <div class="scroll-content" style="max-height: 250px; overflow-y: auto;">
-      <table>
-        <thead>
-          <tr class="table-header">
-            <th>
-              <input type="checkbox" id="parentCheckBox" (change)="clickAllCheckBoxes()" />
-            </th>
-            <th class="data">ACE ID <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">First Name <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Last Name <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Designation <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Team <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Practice <i class="ph ph-funnel-simple"></i></th>
-            <th class="data">Action <i class="ph ph-funnel-simple"></i></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngIf="TNData.length === 0" class="nodata">
-            <td colspan="8">No Data Found</td>
-          </tr>
-          <tr *ngFor="let data of TNData; let i = index" class="table-data">
-            <td>
-              <input type="checkbox" [id]="'checkbox' + i" />
-            </td>
-            <td class="data">{{ data.ACE_ID }}</td>
-            <td class="data">{{ data.FIRST_NAME }}</td>
-            <td class="data">{{ data.LAST_NAME }}</td>
-            <td class="data">{{ data.DESIGNATION }}</td>
-            <td class="data">{{ data.TEAM }}</td>
-            <td class="data">{{ data.PRACTICE }}</td>
-            <td class="data">
-              <button type="button" (click)="editMember(i)"><i class="ph ph-pencil-simple"></i></button>
-              <button type="button" (click)="deleteMember(i)"><i class="ph ph-trash"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive" style="max-height: 250px;">
+        <table class="table table-hover" style="min-width: 1000px;">
+          <thead class="table-light sticky-top">
+            <tr>
+              <th>
+                <input type="checkbox" id="parentCheckBox" class="form-check-input" (change)="clickAllCheckBoxes()">
+              </th>
+              <th>ACE ID <i class="ph ph-funnel-simple"></i></th>
+              <th>First Name <i class="ph ph-funnel-simple"></i></th>
+              <th>Last Name <i class="ph ph-funnel-simple"></i></th>
+              <th>Designation <i class="ph ph-funnel-simple"></i></th>
+              <th>Team <i class="ph ph-funnel-simple"></i></th>
+              <th>Practice <i class="ph ph-funnel-simple"></i></th>
+              <th>Action <i class="ph ph-funnel-simple"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            @if(TNData.length===0){
+            <tr class="text-center">
+              <td colspan="8">No Data Found</td>
+            </tr>
+            }
+            @for(data of TNData; track data; let i=$index){
+            <tr>
+              <td>
+                <input type="checkbox" [id]="'checkbox' + i" class="form-check-input">
+              </td>
+              <td class="text-purple">{{ data.ACE_ID }}</td>
+              <td>{{ data.FIRST_NAME }}</td>
+              <td>{{ data.LAST_NAME }}</td>
+              <td>{{ data.DESIGNATION }}</td>
+              <td>{{ data.TEAM }}</td>
+              <td>{{ data.PRACTICE }}</td>
+              <td class="text-center">
+                <button type="button" class="btn btn-link p-0 me-2" (click)="editMember(i)">
+                  <i class="ph ph-pencil-simple"></i>
+                </button>
+                <button type="button" class="btn btn-link p-0" (click)="deleteMember(i)">
+                  <i class="ph ph-trash"></i>
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="Member-Management" *ngIf="showMemberManagement">
-  <div class="inner-Membermanagement">
-    <form [formGroup]="memberForm" (ngSubmit)="addMember(memberForm.value)">
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <h2>Add Member</h2>
+<!-- Add Member Modal -->
+<div class="modal fade" [class.show]="showMemberManagement" [style.display]="showMemberManagement ? 'block' : 'none'">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form [formGroup]="memberForm" (ngSubmit)="addMember(memberForm.value)">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Member</h5>
+          <button type="button" class="btn-close" (click)="showMember()"></button>
         </div>
-        <div class="inner-formcontrols" (click)="showMember()">
-          <i class="ph ph-x"></i>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+              <input type="text" class="form-control" placeholder="ACE ID" formControlName="ACE_ID">
+            </div>
+            <div class="col-12 col-md-6">
+              <input type="text" class="form-control" placeholder="First Name" formControlName="First_Name">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+              <input type="text" class="form-control" placeholder="Last Name" formControlName="Last_Name">
+            </div>
+            <div class="col-12 col-md-6">
+              <input type="text" class="form-control" placeholder="Designation" formControlName="Designation">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+              <input type="text" class="form-control" placeholder="Team" formControlName="Team">
+            </div>
+            <div class="col-12 col-md-6">
+              <input type="text" class="form-control" placeholder="Practice" formControlName="Practice">
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="ACE ID" formControlName="ACE_ID" />
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-purple" (click)="clearForm()">
+            <i class="ph ph-prohibit"></i> Cancel
+          </button>
+          <button type="submit" class="btn btn-purple" [disabled]="!memberForm.valid">
+            <i class="ph ph-plus"></i> Add
+          </button>
         </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="First Name" formControlName="First_Name" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Last Name" formControlName="Last_Name" />
-        </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Designation" formControlName="Designation" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Team" formControlName="Team" />
-        </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Practice" formControlName="Practice" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <button type="button" (click)="clearForm()"><i class="ph ph-prohibit"></i> Cancel</button>
-        </div>
-        <div class="inner-formcontrols">
-          <button type="submit" [disabled]="!memberForm.valid"><i class="ph ph-plus"></i> Add</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
 
-<div class="Member-Management" *ngIf="showUploadFile">
-  <div class="inner-Membermanagement">
-    <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <h2>Upload File</h2>
+<!-- Upload File Modal -->
+<div class="modal fade" [class.show]="showUploadFile" [style.display]="showUploadFile ? 'block' : 'none'">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
+        <div class="modal-header">
+          <h5 class="modal-title">Upload File</h5>
+          <button type="button" class="btn-close" (click)="showFileUpload()"></button>
         </div>
-        <div class="inner-formcontrols" (click)="showFileUpload()">
-          <i class="ph ph-x"></i>
+        <div class="modal-body">
+          <div class="mb-3">
+            <input type="file" class="form-control" formControlName="fileUpload" (change)="onFileChange($event)">
+          </div>
         </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols fileUpload">
-          <input type="file" placeholder="Excel File" formControlName="fileUpload" (change)="onFileChange($event)" />
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-purple" (click)="clearForm()">
+            <i class="ph ph-prohibit"></i> Cancel
+          </button>
+          <button type="submit" class="btn btn-purple" [disabled]="!uploadForm.valid">Submit</button>
         </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <button type="button" (click)="clearForm()"><i class="ph ph-prohibit"></i> Cancel</button>
-        </div>
-        <div class="inner-formcontrols">
-          <button type="submit" [disabled]="!uploadForm.valid">Submit</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
 
-<div class="Member-Management" *ngIf="showEditMember">
-  <div class="inner-Membermanagement">
-    <form [formGroup]="editMemberForm" (ngSubmit)="EditedMemberDetails(editMemberForm.value)">
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <h2>Edit Member</h2>
+<!-- Edit Member Modal -->
+<div class="modal fade" [class.show]="showEditMember" [style.display]="showEditMember ? 'block' : 'none'">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form [formGroup]="editMemberForm" (ngSubmit)="EditedMemberDetails(editMemberForm.value)">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Member</h5>
+          <button type="button" class="btn-close" (click)="showEdit()"></button>
         </div>
-        <div class="inner-formcontrols" (click)="showEdit()">
-          <i class="ph ph-x"></i>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+              <input type="text" class="form-control" placeholder="ACE ID" formControlName="ACE_ID">
+            </div>
+            <div class="col-12 col-md-6">
+              <input type="text" class="form-control" placeholder="First Name" formControlName="First_Name">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+              <input type="text" class="form-control" placeholder="Last Name" formControlName="Last_Name">
+            </div>
+            <div class="col-12 col-md-6">
+              <input type="text" class="form-control" placeholder="Designation" formControlName="Designation">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+              <input type="text" class="form-control" placeholder="Team" formControlName="Team">
+            </div>
+            <div class="col-12 col-md-6">
+              <input type="text" class="form-control" placeholder="Practice" formControlName="Practice">
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="ACE ID" formControlName="ACE_ID" />
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-purple" (click)="clearForm()">
+            <i class="ph ph-prohibit"></i> Cancel
+          </button>
+          <button type="submit" class="btn btn-purple" [disabled]="!editMemberForm.valid"
+            (click)="onEditSubmitClicked()">Submit</button>
         </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="First Name" formControlName="First_Name" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Last Name" formControlName="Last_Name" />
-        </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Designation" formControlName="Designation" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Team" formControlName="Team" />
-        </div>
-        <div class="inner-formcontrols">
-          <input type="text" placeholder="Practice" formControlName="Practice" />
-        </div>
-      </div>
-      <div class="formcontrols">
-        <div class="inner-formcontrols">
-          <button type="button" (click)="clearForm()"><i class="ph ph-prohibit"></i> Cancel</button>
-        </div>
-        <div class="inner-formcontrols">
-          <button type="submit" [disabled]="!editMemberForm.valid">Submit</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
