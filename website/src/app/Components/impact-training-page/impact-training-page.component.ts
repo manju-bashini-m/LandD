@@ -203,4 +203,7 @@ export class ImpactTrainingPageComponent {
       alert('Please select a file before uploading.');
     }
   }
+  onEditSubmitClicked(){
+    
+  }
 }

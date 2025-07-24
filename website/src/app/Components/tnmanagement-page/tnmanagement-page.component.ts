@@ -182,7 +182,9 @@ export class TnmanagementPageComponent {
       this.selectedFile = input.files[0];
     }
   }
-
+  onEditSubmitClicked(){
+    
+  }
   uploadFile(): void {
     if (this.selectedFile) {
       this.traineeDetailsService.TNDetailsSendExcelFile(this.selectedFile);
