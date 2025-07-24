@@ -62,13 +62,10 @@
 <div class="container my-3">
   <div
     class="table-responsive"
-    style="
-      max-height: 300px; 
-      overflow-y: auto;
-      border: 1px solid #dee2e6;
-    ">
+    style="max-height: 300px; overflow-y: auto;"
+  >
     <table class="table table-hover mb-0">
-      <thead style="font-size: 1vw;" class="table-light sticky-top custom-header">
+      <thead style="font-size: 1vw;" class="table-light custom-header">
         <tr>
           <th scope="col">
             <input
@@ -244,19 +241,17 @@
           </div>
         </div>
 
-        <!-- Footer -->
         <div class="modal-footer">
           <button
             type="button"
-            class="btn"
-            style="color: #8347ad; background-color: white; border-color:#8347ad;;"
+            class="btn btn-outline-secondary me-2"
             (click)="clearForm()">
             <i class="ph ph-prohibit"></i> Cancel
           </button>
           <button
             type="submit"
-            class="btn"
-            style="background-color: #8347ad;color:white"
+            class="btn text-white"
+            style="background-color:#8347ad;"
             [disabled]="!uploadForm.valid">
             Submit
           </button>
@@ -311,7 +306,7 @@
 
         <!-- Modal Footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" (click)="clearForm(); showEdit();">
+          <button type="button" style="border:1px solid purple;" class="btn btn-outline-secondary btn-sm btn-hover-purple" (click)="clearForm(); showEdit();">
             <i class="ph ph-prohibit"></i> Cancel
           </button>
           <button type="submit" class="btn text-white" style="background-color: #8347ad;" [disabled]="editMemberForm.valid">

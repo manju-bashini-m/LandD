@@ -27,7 +27,7 @@
         Employees: 0{{ reviewDetails.length }}
       </button>
       <button
-        type="button" style="background-color: white; padding:8px;border:none;color:black"
+        type="button" style="background-color: white; padding:8px;border:none;"
         *ngIf="reviewDetails.length >= 10"
         class="btn btn-outline-secondary btn-sm">
         Employees: {{ reviewDetails.length }}
@@ -36,11 +36,11 @@
       type="button"
       class="btn btn-outline-secondary btn-sm"
       (click)="downloadTable()"
-      style="background-color: white; padding:8px;border:none;color:black">
+      style="background-color: white; padding:8px;border:none;">
         <i class="ph ph-download-simple"></i>
       </button>
       <button
-        type="button" style="background-color: white; padding:8px ;border:none;color:black"
+        type="button" style="background-color: white; padding:8px ;border:none;"
         class="btn btn-outline-secondary btn-sm"
         (click)="deleteAllMembers()">
         <i class="ph ph-trash"></i>
@@ -231,7 +231,7 @@
           <button
             type="submit"
             class="btn text-white"
-            style="background-color:#9C6FE4;"
+            style="background-color:#8347ad;"
             [disabled]="!uploadForm.valid">
             Submit
           </button>

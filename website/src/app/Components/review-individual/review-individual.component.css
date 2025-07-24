@@ -512,6 +512,21 @@ form{
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+.table-responsive {
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+}
+.table-responsive table {
+  margin-bottom: 0;
+}
+.table-responsive thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #f8f9fa; /* This matches your Bootstrap .table-light */
+}
 
 .table-responsive::-webkit-scrollbar {
   width: 6px;

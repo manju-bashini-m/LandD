@@ -30,19 +30,19 @@ Description: This component is used to review details of each individual.
           </div>
           <div class="d-flex flex-wrap gap-2">
             <button type="button" id="btn-to-hover" class="btn btn-outline-secondary btn-sm btn-hover-purple"
-                    style="background-color: white; padding:8px; border:none; color:black">
+                    style="background-color: white; padding:8px; border:none;">
               Questions: {{questionBank.length < 10 ? '0' + questionBank.length : questionBank.length}}
             </button>
             <button type="button" id="btn-to-hover" class="btn btn-outline-secondary btn-sm"
-                    style="background-color: white; padding:8px; border:none; color:black" title="Download">
+                    style="background-color: white; padding:8px; border:none" title="Download">
               <i class="ph ph-download-simple"></i>
             </button>
             <button type="button" id="btn-to-hover" class="btn btn-outline-secondary btn-sm"
-                    style="background-color: white; padding:8px; border:none; color:black"
+                    style="background-color: white; padding:8px; border:none;"
                     (click)="deleteAllMembers()" title="Delete All">
               <i class="ph ph-trash"></i>
             </button>
-            <button type="button" class="btn"
+            <button type="button" class="btn btn-sm"
                     style="background: #8347ad; color: #fff; font-weight: 500; border-radius: 8px;"
                     (click)="showAddQuestion = true">
               <i class="ph ph-plus"></i> Add Question
@@ -182,16 +182,16 @@ Description: This component is used to review details of each individual.
         </div>
         <div class="d-flex mt-4 gap-2 justify-content-end">
           <button type="button"
-                  class="btn"
-                  style="border:1.5px solid #9C6FE4; color:#9C6FE4; background:transparent; border-radius:8px; min-width:100px; font-weight:500;"
-                  (click)="showAddQuestion = false">
+                  class="btn btn-outline-secondary me-2"
+                   (click)="showAddQuestion = false">
             <i class="ph ph-prohibit me-1"></i>Cancel
           </button>
           <button type="submit"
-                  class="btn"
+                  class="btn text-white"
+                  style="background-color:#8347ad;"
                   [disabled]="!questionForm.valid"
                   (click)="addQuestion(questionForm.value)"
-                  style="background:#9C6FE4; color:white; border-radius:8px; min-width:100px; font-weight:500;">
+                  >
             <i class="ph ph-plus me-1"></i>Add
           </button>
         </div>
