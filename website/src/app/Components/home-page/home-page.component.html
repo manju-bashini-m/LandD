@@ -1,16 +1,16 @@
 <div class="Homepage d-flex flex-column flex-md-row bg-light min-vh-100 sidebar">
   <!-- Sidebar -->
   <div class="sidebar-container bg-white p-3 sticky-md-top d-none d-md-flex flex-column">
-    <div class="sidebar-outer d-flex flex-column align-items-center gap-3 w-100">
-      <div class="sidebar-contents text-center mb-3">
+    <div class="sidebar-outer d-flex flex-column align-items-center gap-2 w-100">
+      <div class="sidebar-contents text-center p-1">
         <img src="assets/Login/Login-FormLogo.svg" alt="Aspire logo" class="img-fluid" />
       </div>
 
-      <div class="sidebar-contents w-100" *ngFor="let link of sideBarLinks; let i = index">
+      <div class="sidebar-contents w-100 " *ngFor="let link of sideBarLinks; let i = index">
         <a class="sideBarLinks text-decoration-none d-block" [routerLink]="link.route" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }" (click)="subNavLink(i)">
-          <div class="sidebar d-flex justify-content-between align-items-center">
-            <div class="sidebar-links d-flex align-items-center gap-2">
+          <div class="sidebar d-flex justify-content-between align-items-center ">
+            <div class="sidebar-links d-flex align-items-center gap-1">
               <i [class]="link.icon"></i>
               <label>{{ link.pageName }}</label>
             </div>
@@ -49,18 +49,29 @@
   <!-- Main Content -->
   <div class="main-container flex-grow-1 d-flex flex-column">
     <!-- Top Navbar -->
-    <div class="homePage-main d-flex justify-content-between align-items-center bg-white p-3 flex-wrap">
+    <div class="homePage-main d-flex justify-content-between align-items-center bg-white p-1 flex-wrap">
       <div class="main-contents d-flex align-items-center gap-3 mb-2 mb-md-0">
         <div class="inner-main-contents">
-          <label class="fw-semibold">Talent Nurturing | Management</label>
+          <label class="fw-semibold p-3">Talent Nurturing | Management</label>
         </div>
       </div>
 
-      <div class="main-contents d-flex align-items-center gap-3">
-        <div class="inner-main-contents position-relative">
+     <div class="main-contents d-flex align-items-center gap-3">
+        <!-- <div class="inner-main-contents position-relative">
           <input type="text" placeholder="Search" class="search-bar form-control" />
           <i class="ph ph-magnifying-glass position-absolute top-50 end-0 translate-middle-y me-3"></i>
-        </div>
+        </div> -->
+       <div class="position-relative">
+  <input
+    type="text"
+    placeholder="Search"
+    class="form-control pe-5"
+  />
+  <i
+    class="ph ph-magnifying-glass search-icon position-absolute"
+  ></i>
+</div> 
+
         <div class="inner-main-contents">
           <i class="ph ph-gear"></i>
         </div>
@@ -68,7 +79,7 @@
           <i class="ph ph-bell"></i>
         </div>
         <div class="inner-main-contents d-flex align-items-center gap-2">
-          <div class="profile">
+          <div class="profile pt-3">
             <img src="assets/Dashboard/DashboardProfile.svg" alt="profile image" class="rounded-circle" />
           </div>
           <div class="profile">
@@ -87,5 +98,5 @@
     <div class="flex-grow-1 p-3 content" style=" background-color: #f3f3f3;">
       <router-outlet></router-outlet>
     </div>
-  </div>
+   </div>
 </div>

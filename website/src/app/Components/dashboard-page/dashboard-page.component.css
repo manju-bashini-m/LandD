@@ -44,4 +44,10 @@ canvas {
 .container{
   padding: 20px;
   margin-bottom: auto;
+  width: auto;
+}
+
+.ngx-class{
+  padding-top: 50px;
+
 }
