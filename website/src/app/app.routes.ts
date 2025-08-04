@@ -10,13 +10,8 @@ import { QuestionBankComponent } from './Components/question-bank/question-bank.
 import { DashboardPageComponent } from './Components/dashboard-page/dashboard-page.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
 import { TnStructureComponent } from './Components/tn-structure/tn-structure.component';
-<<<<<<< HEAD
 import { EmailComponent } from './Components/email/email.component';
-=======
 import { LoginComponent } from './Components/login/login.component';
-
->>>>>>> 56bc637a4c88e66ede5d911b00f0fd080778118f
-
 
 export const routes: Routes = [
      {
@@ -85,7 +80,7 @@ export const routes: Routes = [
                {
                     path:'email',
                     component: EmailComponent,
-                    title:"Email"
+                    title:"email"
                }
           ]
      },
