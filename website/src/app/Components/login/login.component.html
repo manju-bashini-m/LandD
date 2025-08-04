@@ -1,0 +1,46 @@
+ <div class="Login-Page">
+    <div class="inner-Login-Page"></div>
+    <div class="inner-Login-Page">
+        <div class="Login-Form">
+            <img src="./assets/Login/Login-SideImage.svg" alt="login-sideImage">
+        </div>
+        <div class="Login-Form">
+            <div class="form-controls form-flex">
+                <img src="./assets/Login/Login-FormLogo.svg" alt="Aspire Logo">
+            </div>
+            <form [formGroup]="loginForm">
+            <div class="form-controls">
+                <div class="inner-form-controls">
+                    <label for="">Email <span>*</span></label>
+                </div>
+                <div class="inner-form-controls">
+                    <input type="text" placeholder="Enter your Email" formControlName="EmployeeEmail">
+                    <img *ngIf="!(loginForm.get('EmployeeEmail')?.errors?.['pattern'] && (loginForm.get('EmployeeEmail')?.dirty || loginForm.get('EmployeeEmail')?.touched))" src="./assets/Login/Login-TrueIcon1.svg" alt="normal Icon" style="width: 30px;">
+                    <img *ngIf="loginForm.get('EmployeeEmail')?.errors?.['pattern'] && (loginForm.get('EmployeeEmail')?.dirty || loginForm.get('EmployeeEmail')?.touched)" src="./assets/Login/Login-EmailErrorIcon.svg" alt="Error Icon" style="width: 30px;">
+                    <img *ngIf="loginForm.get('EmployeeEmail')?.valid" src="./assets/Login/Login-EmailSuccessIcon.svg" alt="Success Icon" style="width: 30px;">
+                    
+                </div>
+                <div class="inner-form-controls">
+                    <small class="invalid" *ngIf="loginForm.get('EmployeeEmail')?.errors?.['pattern'] && (loginForm.get('EmployeeEmail')?.dirty || loginForm.get('EmployeeEmail')?.touched)">Enter a Valid Email Address!</small>
+                </div>
+            </div>
+            <div class="form-controls">
+                <div class="inner-form-controls">
+                    <label for="">Password <span>*</span></label>
+                </div>
+                <div class="inner-form-controls">
+                    <input [type]="passwordType" placeholder="Enter your Password"   formControlName="EmployeePassword">
+                    <img *ngIf="!isToggleEyeIcon" src="./assets/Login/Login-eyeCloseIcon.svg" alt="Eye Close Icon" style="width: 30px;" (click)="togglePassword()">
+                    <img *ngIf="isToggleEyeIcon" src="./assets/Login/Login-eyeOpenIcon.svg" alt="Eye Open Icon" style="width: 30px;" (click)="togglePassword()">
+                </div>
+                <div class="inner-form-controls">
+                    <!-- <small class="invalid" *ngIf="loginForm.get('EmployeePassword')?.errors?.['pattern'] && (loginForm.get('EmployeePassword')?.dirty || loginForm.get('EmployeePassword')?.touched)">Wrong password. Try Again!</small> -->
+                </div>
+            </div>
+            <div class="form-controls form-flex">
+                <button class="login-button" [disabled]="!loginForm.valid" (click)="routeToDashboard(loginForm.value)">LOGIN</button>
+            </div>
+        </form>
+        </div>
+    </div>
+ </div>

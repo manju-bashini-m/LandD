@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, F
 import { Router } from '@angular/router';
 import { TraineeDetailsService } from '../../Service/trainee-details.service';
 import { CommonModule } from '@angular/common';
+// import { CLIENT_RENEG_LIMIT } from 'node:tls';
 
 @Component({
   selector: 'app-review-trainee',
@@ -16,6 +17,8 @@ export class ReviewTraineeComponent {
   private traineeDetailsService = inject(TraineeDetailsService);
   private router = inject(Router);
 
+  showTraineeView = false;
+  selectedTrainee: any = null;
   TNData: any[] = [];
   checkTNData: any[] = [];
   checkboxIndex = 1;
@@ -85,6 +88,12 @@ export class ReviewTraineeComponent {
   showFileUpload(): void {
     this.showUploadFile = !this.showUploadFile;
   }
+
+  closeTraineeDetails(): void {
+  this.showTraineeView = false;
+  this.selectedTrainee = null;
+}
+
 
   clickAllCheckBoxes(): void {
     for (let i = 0; i < this.TNData.length; i++) {
@@ -174,10 +183,12 @@ export class ReviewTraineeComponent {
   }
 
   showTraineeDetails(index: number): void {
-    if (index >= 0) {
-      this.traineeDetail = this.TNData[index];
-    }
-    this.showTraineeList = !this.showTraineeList;
+  console.log('Clicked trainee index:', index);
+  this.showTraineeView = true;
+  this.traineeDetail = this.TNData[index];
+  console.log("Trainee details :"+this.traineeDetail)
+  console.log('Trainee details:', JSON.stringify(this.traineeDetail, null, 2));
+  //this.showTraineeList = !this.showTraineeList;
   }
 
   onFileChange(event: Event): void {

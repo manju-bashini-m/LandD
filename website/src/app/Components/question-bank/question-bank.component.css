@@ -352,7 +352,6 @@ form{
 
 .btn-hover-purple {
   background-color: white;
-  color: black;
   border: none;
   padding: 8px;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -386,5 +385,21 @@ table.table th {
   background-color: transparent;
 }
 
+.btn-outline-secondary:hover{
+  background-color: #8347ad !important;
+  color: white !important;
+  border-color: #8347ad !important;
+}
+
+/* Table row hover */
+.table-hover tbody tr:hover {
+  background-color: #8347ad;
+  color: white;
+}
+
+/* Optional: keep text inside buttons white on hover */
+.btn-outline-secondary:hover i{
+  color: white !important;
+}
 
 

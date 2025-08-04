@@ -1,0 +1,138 @@
+:Host{
+    --primary-color: #9C6FE4;
+    --secondary-color: #FFFFFF;
+    --tertiary-color: #33333380;
+    --error-color:#E4534C;
+}
+
+.Login-Page{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-image: url("/assets/Login/Login-BackgroundImage.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.inner-Login-Page:nth-child(1){
+    background-color: var(--primary-color);
+    height: 922px;
+    width: 451px;
+    position: absolute;
+    top: 78px;
+    left: 0px;
+    border-radius: 0px 134px 0px 0px;
+    z-index:0;
+}
+
+.inner-Login-Page:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1050px;
+    height: 470px;
+    padding: 10px;
+    z-index: 1;
+}
+
+.Login-Form img:nth-child(1){
+    width: 500px;
+    height: 485px;
+}
+
+.Login-Form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Login-Form:nth-child(2){
+    background-color: var(--secondary-color);
+    padding: 10px 40px 10px 40px;
+    box-shadow: 1px 1px 10px 0.4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    height: 400px;
+}
+
+.form-controls{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-flex{
+    align-items: center;
+}
+
+.Login-Form .form-controls img{
+    width: 136px;
+    height: 78px;
+}
+.inner-form-controls{
+    position: relative;
+}
+.inner-form-controls img{
+    position: absolute;
+    top: -19px;
+    right: 10px;
+}
+
+.inner-form-controls label{
+    font-size: 1vw;
+}
+.inner-form-controls input{
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid var(--tertiary-color);
+    padding-left: 10px;
+}
+.inner-form-controls span{
+    color: var(--error-color);
+}
+
+.login-button{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    width: 300px;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all linear 0.3s;
+}
+
+.micro-logo {
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--tertiary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all linear 0.3s;
+}
+
+
+.error{
+    border: 1px solid var(--error-color);
+}
+
+.invalid{
+    color: var(--error-color);
+}

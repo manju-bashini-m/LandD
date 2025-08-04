@@ -14,6 +14,7 @@
 
 /* Custom Purple Button */
 .btn-purple {
+    font-size: 0.8 rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     border-color: var(--secondary-color);
@@ -25,6 +26,7 @@
 }
 
 .btn-outline-purple {
+    font-size: 0.8rem;
     color: var(--secondary-color);
     border-color: var(--secondary-color);
 }
@@ -347,4 +349,21 @@
 .nowrap-table td:focus {
   outline: none;
   box-shadow: none;
+}
+
+
+input.form-control {
+  font-size: 0.8rem;
+}
+
+input.form-control::placeholder {
+  font-size: 0.8rem;
+}
+
+.modal-title{
+    font-size: 1 rem;
+}
+.showTraineeDetails p,
+.showTraineeDetails label {
+  font-size: 0.8rem;
 }

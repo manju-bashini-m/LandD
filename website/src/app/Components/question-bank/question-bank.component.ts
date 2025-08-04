@@ -114,13 +114,23 @@ export class QuestionBankComponent {
     }
   }
 
-   deleteQuestion(index:any){
-    if(confirm("sure you want to Remove "+this.questionBank[index].TECHNOLOGY_NAME)) {
-      this.traineeDetailsService.deleteQuestion(this.questionBank[index]);
-      this.questionBank.splice(index,1);
-      this.checkreviewDetails = this.questionBank;
-    }
+  // In your component
+deleteQuestion(index: number): void {  // Use `number` for clarity
+  const question = this.questionBank[index];
+  if (confirm(`Are you sure you want to remove ${question.TECHNOLOGY_NAME}?`)) {
+    this.traineeDetailsService.deleteQuestion(question).subscribe({
+      next: () => {
+        this.questionBank.splice(index, 1);
+        this.checkreviewDetails = this.questionBank.slice(); // Optional: Trigger change detection if ngFor
+      },
+      error: (err) => {
+        console.error('Failed to delete question:', err);
+        // Optionally, show an error message to the user
+      }
+    });
   }
+}
+
 
   showEdit() {
     this.showEditMember = !this.showEditMember;

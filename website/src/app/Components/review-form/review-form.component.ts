@@ -15,13 +15,13 @@ export class ReviewFormComponent {
   private dataService = inject(TraineeDetailsService);
 
   reviewForm: FormGroup = this.formBuilder.group({
-    technicalTopic: [''],
+    technicalTopic: ['', Validators.required],
     reviewerName: ['', Validators.required],
     reviewerID: ['', Validators.required],
-    nonTechnicalTopic: [''],
+    nonTechnicalTopic: ['', Validators.required],
     traineeName: ['', Validators.required],
     traineeID: ['', Validators.required],
-    reviewType: [''],
+    reviewType: ['', Validators.required],
     mentorName: ['', Validators.required],
     mentorID: ['', Validators.required],
     reviewDate: ['', Validators.required],
@@ -50,6 +50,13 @@ export class ReviewFormComponent {
       EMPLOYEE_EMAIL: sessionStorage.getItem('Employee_Email')
     };
     console.log(reviewFormDetails);
-    this.dataService.reviewFormDetails(reviewFormDetails);
+    this.dataService.reviewFormDetails(reviewFormDetails).subscribe({
+        next: (res) => {
+          console.log('Response:', res);
+        },
+        error: (err) => {
+          console.error('Error:', err);
+        }
+      });
   }
 }

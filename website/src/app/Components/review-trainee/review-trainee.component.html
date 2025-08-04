@@ -23,16 +23,17 @@
       <button
         type="button"
         *ngIf="TNData.length < 10"
-        class="btn btn-outline-secondary btn-sm btn-hover-purple">
+        class="btn">
         Employees: 0{{ TNData.length }}
       </button>
-      <button
+      <button style="background-color: white; padding:8px;border:none;"
         type="button"
         *ngIf="TNData.length >= 10"
-        class="btn btn-outline-secondary btn-sm btn-hover-purple">
+        class="btn btn-outline-secondary btn-sm">
         Employees: {{ TNData.length }}
       </button>
       <button
+      style="background-color: white;border:none"
         type="button"
         (click)="downloadTable()"
         class="btn btn-outline-secondary btn-sm btn-hover-purple">
@@ -41,6 +42,7 @@
       </button>
       <button
         type="button"
+        style="background-color: white;border:none"
         class="btn btn-outline-secondary btn-sm btn-hover-purple"
         (click)="deleteAllMembers()">
         <i class="ph ph-trash"></i>
@@ -76,14 +78,14 @@
           <td>
             <input type="checkbox" style="border: 1px solid grey;" class="form-check-input" [id]="'checkbox' + i" />
           </td>
-          <td (click)="showTraineeDetails(i)" style="cursor: pointer; color:#9C6FE4 ">{{ data.TRAINEE_ID }}</td>
+          <td (click)="showTraineeDetails(i)" style="cursor: pointer; color:#8347ad">{{ data.TRAINEE_ID }}</td>
           <td>{{ data.TRAINEE_NAME }}</td>
           <td>{{ data.TECHNOLOGY }}</td>
           <td>
             <button
               type="button"
               class="btn btn-link text-dark p-0"
-              (click)="showTraineeDetails(i)">
+              (click)="showTraineeDetails(i); $event.stopPropagation()">
               <i class="ph ph-eye"></i>
             </button>
           </td>
@@ -163,20 +165,57 @@
         </div>
         <div class="modal-footer">
           <button
-            type="button" 
-            class="btn btn-outline-secondary"
+            type="button"
+            class="btn btn-outline-secondary me-2"
             (click)="clearForm()">
             <i class="ph ph-prohibit"></i> Cancel
           </button>
           <button
             type="submit"
             class="btn text-white"
-            style="background-color:#9C6FE4;"
+            style="background-color:#8347ad;"
             [disabled]="!uploadForm.valid">
             Submit
           </button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- View Trainee Modal -->
+<div
+  class="modal show fade d-block"
+  tabindex="-1"
+  *ngIf="showTraineeView"
+  style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: #8347ad;">Trainee Details</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeTraineeDetails()">
+        </button>
+      </div>
+      <div class="modal-body">
+        <p ><strong style="color: #8347ad;" >Trainee Name:</strong> {{ traineeDetail.TRAINEE_NAME }}</p>
+        <p ><strong style="color: #8347ad;">Trainee ID:</strong> {{ traineeDetail.TRAINEE_ID }}</p>
+        <p ><strong style="color: #8347ad;">Reviewer:</strong> {{ traineeDetail.REVIEWER_NAME }} ({{ traineeDetail.REVIEWER_ID }})</p>
+        <p ><strong style="color: #8347ad;">Mentor:</strong> {{ traineeDetail.MENTOR_NAME }} ({{ traineeDetail.MENTOR_ID }})</p>
+        <p ><strong style="color: #8347ad;">Team:</strong> {{ traineeDetail.TN_TEAM }} ({{ traineeDetail.TN_TEAM_ID }})</p>
+        <p ><strong style="color: #8347ad;">Review Type:</strong> {{ traineeDetail.REVIEW_TYPE }}</p>
+        <p ><strong style="color: #8347ad;">Technology:</strong> {{ traineeDetail.TECHNOLOGY }}</p>
+        <p ><strong style="color: #8347ad;">Performance:</strong> {{ traineeDetail.OVERALL_PERFORMANCE }}</p>
+        <p ><strong style="color: #8347ad;">Score:</strong> {{ traineeDetail.OVERALL_SCORE }}%</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm btn-hover-purple" (click)="closeTraineeDetails()">
+          <i class="ph ph-prohibit"></i> Close
+        </button>
+      </div>
     </div>
   </div>
 </div>
