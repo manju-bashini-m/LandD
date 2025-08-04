@@ -1,0 +1,95 @@
+.label-pill {
+  border: 1px solid #8347ad;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1vw;
+    color: #8347ad;
+    margin-right: 20px;
+}
+/* input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #8347ad;
+}
+input:focus{
+    outline: none;
+} */
+
+.form-line {
+  border: none;
+  border-bottom: 1px solid purple;
+  outline: none;
+  width: 100%;
+  padding: 6px 0;
+  background-color: transparent;
+  color: #333;
+}
+
+.form-line:focus {
+  box-shadow: none;
+  border-bottom: 2px solid #8347ad;
+}
+
+.form-select-box {
+  border: 1px solid #8347ad;
+  border-radius: 6px;
+  padding: 6px 8px;
+  background-color: white;
+  font-size: 14px;
+  width: 100%;
+}
+
+.form-select-box:focus {
+  outline: none;
+  border-color: #8347ad;
+  box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.1);
+}
+
+
+.select {
+    width: 50%;
+    height: 30px;
+    border: 1px solid #8347ad;
+    border-radius: 5px;
+    color:#8347ad;
+}
+.select:focus{
+    outline: none;
+}
+
+
+.border-purple {
+  border: 1px solid #8347ad !important;
+  border-radius: 8px;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+.btn-primary {
+  background-color: #8347ad;
+  border-color: #8347ad;
+}
+
+.btn-primary:hover {
+  background-color: #6a1b9a;
+  border-color: #6a1b9a;
+}
+
+.discard-button {
+  background-color: transparent;
+  color: #8347ad;
+  border: 1px solid #8347ad;
+}
+
+.discard-button:hover {
+  background-color: rgba(131, 71, 173, 0.1); /* optional light purple on hover */
+  color: #8347ad;
+  border-color: #8347ad;
+}

@@ -1,0 +1,95 @@
+<div class="container mt-4 ">
+  <div class="mb-3">
+    <h2>Email</h2>
+    <p style="color: #8347ad;">Email</p>
+  </div>
+
+
+  <form [formGroup]="mailForm" class="p-3 border rounded bg-light">
+
+    <!-- TO ROW -->
+    <div class="row align-items-center mb-3">
+      <div class="col-auto">
+        <span class="label-pill">To</span>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-line" [value]="selectedDomainDisplay.join(', ')" disabled />
+      </div>
+      <div class="col-md-3">
+        <select formControlName="selectedDomain" (change)="domainsToMail()" class="form-select-box w-100 select">
+          <option value="" selected>Select The Team</option>
+          <option>Impact Trainee</option>
+          <option>Internship</option>
+          <option>COE</option>
+          <option>TN Team</option>
+          <option>Individual</option>
+          <option>All</option>
+        </select>
+      </div>
+      <div class="col-md-3" *ngIf="isShowIndividualList">
+        <select formControlName="subDomain" (change)="impactTraineeMailList()" class="form-select-box w-100 select">
+          <option value="" selected>Select The Domain</option>
+          <option *ngFor="let tech of technologyList">{{ tech }}</option>
+          <option value="all">All</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- CC ROW -->
+    <div class="row align-items-center mb-3">
+      <div class="col-auto">
+        <span class="label-pill">Cc</span>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-line" [value]="selectedCcList.join(', ')" disabled />
+      </div>
+      <div class="col-md-3">
+        <select formControlName="selectedCc" (change)="ccList()" class="form-select-box w-100 select">
+          <option value="" selected>Select The Mail</option>
+          <option *ngFor="let user of employeeList" [value]="user.Mail_Id">{{ user.Mail_Id }}</option>
+        </select>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+    <!-- BCC ROW -->
+    <div class="row align-items-center mb-3">
+      <div class="col-auto">
+        <span class="label-pill">Bcc</span>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-line" [value]="selectedBccList.join(', ')" disabled />
+      </div>
+      <div class="col-md-3">
+        <select formControlName="selectedDomain" (change)="domainsToMail()" class="form-select-box w-100 select">
+          <option value="" selected>Select The Team</option>
+          <option>Impact Trainee</option>
+          <option>Internship</option>
+          <option>COE</option>
+          <option>TN Team</option>
+          <option>Individual</option>
+          <option>All</option>
+        </select>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+    <!-- SUBJECT -->
+    <div class="mb-3">
+      <input type="text" placeholder="Add a subject" class="form-line w-100" formControlName="subject">
+    </div>
+
+    <!-- MESSAGE -->
+    <div class="mb-3">
+      <textarea formControlName="message" class="form-control border-purple" rows="5" placeholder="Add a content here"></textarea>
+      
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <div class="d-flex justify-content-between">
+      <button type="button" class="btn discard-button me-2" (click)="discardMail()">Discard</button>
+      <button type="button" class="btn btn-primary" (click)="sendMail()" [disabled]="!mailForm.valid">Send</button>
+    </div>
+
+  </form>
+</div>

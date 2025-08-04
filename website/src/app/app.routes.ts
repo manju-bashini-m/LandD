@@ -10,6 +10,7 @@ import { QuestionBankComponent } from './Components/question-bank/question-bank.
 import { DashboardPageComponent } from './Components/dashboard-page/dashboard-page.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
 import { TnStructureComponent } from './Components/tn-structure/tn-structure.component';
+import { EmailComponent } from './Components/email/email.component';
 
 
 export const routes: Routes = [
@@ -72,6 +73,11 @@ export const routes: Routes = [
                     component:QuestionBankComponent,
                     title:"Question Bank"
                },
+               {
+                    path:'email',
+                    component: EmailComponent,
+                    title:"Email"
+               }
           ]
      },
 ];
