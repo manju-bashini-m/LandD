@@ -5,14 +5,16 @@
     --font-color: #1E1F24;
     --header-color: #FAF8FE;
 }
+
 /* TN-management css */
-.TN-management{
+.TN-management {
     /* font-size: 0.9vw; */
-     font-size: 0.8rem;
+    font-size: 0.8rem;
 }
 
 /* Custom Purple Button */
 .btn-purple {
+    font-size: 0.8rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     border-color: var(--secondary-color);
@@ -24,6 +26,7 @@
 }
 
 .btn-outline-purple {
+    font-size: 0.8rem;
     color: var(--secondary-color);
     border-color: var(--secondary-color);
 }
@@ -80,7 +83,7 @@
 
 /* Phosphor icons */
 .ph {
-    font-size: 1.2rem;
+    font-size: 0.8 rem;
     vertical-align: middle;
 }
 
@@ -151,4 +154,21 @@
         justify-content: flex-start !important;
         margin-top: 15px;
     }
+}
+
+input.form-control {
+    font-size: 0.8rem;
+}
+
+input.form-control::placeholder {
+    font-size: 0.8rem;
+}
+
+.modal-title{
+    font-size: 1rem;
+}
+
+.showTraineeDetails p,
+.showTraineeDetails label {
+  font-size: 0.8rem;
 }

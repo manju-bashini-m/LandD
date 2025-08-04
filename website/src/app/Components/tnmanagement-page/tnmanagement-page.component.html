@@ -17,21 +17,22 @@
         <span class="input-group-text bg-white border-end-0" style="border-color: #fff;">
           <i class="ph ph-magnifying-glass"></i>
         </span>
-        <input type="text" style="font-size: 0.8rem; outline: none;  box-shadow: none; border-color: #fff;"  class="form-control border-start-0" placeholder="Search by Keyword"
-          formControlName="filterByKeyword" (ngModelChange)="filterByKeyword = $event">
+        <input type="text" style="font-size: 0.8rem; outline: none;  box-shadow: none; border-color: #fff;"
+          class="form-control border-start-0" placeholder="Search by Keyword" formControlName="filterByKeyword"
+          (ngModelChange)="filterByKeyword = $event">
       </form>
     </div>
 
     <div class="col-12 col-md-9 d-flex flex-wrap justify-content-md-end gap-2">
       <div class="d-flex gap-2 me-md-3">
-        @if(TNData.length<10){ <button type="button" style="font-size: 0.8rem;"  class="btn btn-light">Employees : 0{{
+        @if(TNData.length<10){ <button type="button" style="font-size: 0.8rem;" class="btn btn-light">Employees : 0{{
           TNData.length }}</button>
           }
           @if(TNData.length>=10){
-          <button type="button" style="font-size: 0.8rem;"  class="btn btn-light">Employees : {{ TNData.length
-            }}</button>
+          <button type="button" style="font-size: 0.8rem;" class="btn btn-light">Employees : {{ TNData.length
+            }}</button> 
           }
-          <button type="button" class="btn btn-light"><i class="ph ph-download-simple"></i></button>
+          <button type="button" class="btn btn-light" (click)="downloadExcel()"><i class="ph ph-download-simple"></i></button>
           <button type="button" class="btn btn-light" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
       </div>
 
@@ -49,7 +50,7 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="table-responsive" style="max-height: 250px;">
+      <div class="table-responsive" style="max-height: 250px; overflow-x: auto;">
         <table class="table table-hover" style="min-width: 1000px;">
           <thead class="table-light sticky-top">
             <tr>
@@ -93,7 +94,7 @@
             </tr>
             }
           </tbody>
-        </table>
+        </table> 
       </div>
     </div>
   </div>
@@ -105,7 +106,7 @@
     <div class="modal-content">
       <form [formGroup]="memberForm" (ngSubmit)="addMember(memberForm.value)">
         <div class="modal-header">
-          <h5 class="modal-title">Add Member</h5>
+          <h6 class="modal-title">Add Member</h6>
           <button type="button" class="btn-close" (click)="showMember()"></button>
         </div>
         <div class="modal-body">
@@ -125,6 +126,14 @@
               <input type="text" class="form-control" placeholder="Designation" formControlName="Designation">
             </div>
           </div>
+          <div class="row mb-3">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+              <input type="email" class="form-control form-control-email" placeholder="Mail ID" formControlName="Mail_ID">
+            </div>
+            <div class="col-12 col-md-6">
+              <input type="text" class="form-control" placeholder="Password" formControlName="Password">
+            </div>
+          </div>
           <div class="row">
             <div class="col-12 col-md-6 mb-2 mb-md-0">
               <input type="text" class="form-control" placeholder="Team" formControlName="Team">
@@ -133,6 +142,7 @@
               <input type="text" class="form-control" placeholder="Practice" formControlName="Practice">
             </div>
           </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-purple" (click)="clearForm()">
@@ -153,7 +163,7 @@
     <div class="modal-content">
       <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
         <div class="modal-header">
-          <h5 class="modal-title">Upload File</h5>
+          <p class="modal-title">Upload File</p>
           <button type="button" class="btn-close" (click)="showFileUpload()"></button>
         </div>
         <div class="modal-body">
