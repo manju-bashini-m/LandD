@@ -10,11 +10,17 @@ import { QuestionBankComponent } from './Components/question-bank/question-bank.
 import { DashboardPageComponent } from './Components/dashboard-page/dashboard-page.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
 import { TnStructureComponent } from './Components/tn-structure/tn-structure.component';
+import { LoginComponent } from './Components/login/login.component';
+
 
 
 export const routes: Routes = [
      {
-          path: '',
+          path:"",
+          component: LoginComponent
+     },
+     {
+          path: "homePage",
           component: HomePageComponent,
           children: [
                {
