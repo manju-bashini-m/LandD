@@ -13,17 +13,22 @@
         <span class="label-pill">To</span>
       </div>
       <div class="col-md-5">
-        <input type="text" class="form-line" [value]="selectedDomainDisplay.join(', ')" disabled />
+        <div class="chip-container">
+          <div class="chip" *ngFor="let domain of selectedDomainDisplay; let i = index">
+            {{ domain }}
+            <span class="chip-close" (click)="removeSelectedDomain(i)">&times;</span>
+          </div>
+        </div>
       </div>
       <div class="col-md-3">
         <select formControlName="selectedDomain" (change)="domainsToMail()" class="form-select-box w-100 select">
           <option value="" selected>Select The Team</option>
-          <option>Impact Trainee</option>
-          <option>Internship</option>
-          <option>COE</option>
-          <option>TN Team</option>
-          <option>Individual</option>
-          <option>All</option>
+          <option value="Impact Trainee">Impact Trainee</option>
+          <option value="Internship">Internship</option>
+          <option value="COE">COE</option>
+          <option value="TN Team">TN Team</option>
+          <option value="Individual">Individual</option>
+          <option value="ALL">ALL</option>
         </select>
       </div>
       <div class="col-md-3" *ngIf="isShowIndividualList">
@@ -41,7 +46,12 @@
         <span class="label-pill">Cc</span>
       </div>
       <div class="col-md-5">
-        <input type="text" class="form-line" [value]="selectedCcList.join(', ')" disabled />
+        <div class="chip-container">
+          <div class="chip" *ngFor="let cc of selectedCcList; let i = index">
+            {{ cc }}
+            <span class="chip-close" (click)="removeSelectedCc(i)">&times;</span>
+          </div>
+        </div>
       </div>
       <div class="col-md-3">
         <select formControlName="selectedCc" (change)="ccList()" class="form-select-box w-100 select">
@@ -63,12 +73,12 @@
       <div class="col-md-3">
         <select formControlName="selectedDomain" (change)="domainsToMail()" class="form-select-box w-100 select">
           <option value="" selected>Select The Team</option>
-          <option>Impact Trainee</option>
-          <option>Internship</option>
-          <option>COE</option>
-          <option>TN Team</option>
-          <option>Individual</option>
-          <option>All</option>
+          <option value="Impact Trainee">Impact Trainee</option>
+          <option value="Internship">Internship</option>
+          <option value="COE">COE</option>
+          <option value="TN Team">TN Team</option>
+          <option value="Individual">Individual</option>
+          <option value="ALL">ALL</option>
         </select>
       </div>
       <div class="col-md-3"></div>
@@ -81,8 +91,9 @@
 
     <!-- MESSAGE -->
     <div class="mb-3">
-      <textarea formControlName="message" class="form-control border-purple" rows="5" placeholder="Add a content here"></textarea>
-      
+      <textarea formControlName="message" class="form-control border-purple" rows="5"
+        placeholder="Add a content here"></textarea>
+
     </div>
 
     <!-- SUBMIT BUTTON -->

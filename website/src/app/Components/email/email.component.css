@@ -22,7 +22,7 @@ input:focus{
 
 .form-line {
   border: none;
-  border-bottom: 1px solid purple;
+  border-bottom: 1px solid #8347ad;
   outline: none;
   width: 100%;
   padding: 6px 0;
@@ -72,6 +72,11 @@ textarea.form-control {
   resize: vertical;
 }
 
+textarea.form-control:focus {
+  box-shadow: none;
+  border: 2px solid #8347ad;
+}
+
 .btn-primary {
   background-color: #8347ad;
   border-color: #8347ad;
@@ -92,4 +97,31 @@ textarea.form-control {
   background-color: rgba(131, 71, 173, 0.1); /* optional light purple on hover */
   color: #8347ad;
   border-color: #8347ad;
+}
+
+.chip-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 0;
+  min-height: 36px;
+  border-bottom: 1px solid #8347ad;
+}
+
+.chip {
+  background-color: #8347ad;
+  color: white;
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.chip-close {
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1;
 }

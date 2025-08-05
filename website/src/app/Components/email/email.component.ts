@@ -1,6 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TraineeDetailsService } from '../../Service/trainee-details.service';
 
 interface Trainee {
@@ -19,7 +19,6 @@ interface Trainee {
   styleUrls: ['./email.component.css']
 })
 export class EmailComponent {
-  // Inject services using Angular 19 inject() syntax
   private traineeDetailsService = inject(TraineeDetailsService);
   private fb = inject(FormBuilder);
 
@@ -37,6 +36,8 @@ export class EmailComponent {
   selectedBccList: string[] = [];
 
   isShowIndividualList = false;
+  selectedTeam: string = '';
+  teams: string[] = [];
 
   mailForm: FormGroup = this.fb.group({
     selectedDomain: [''],
@@ -158,12 +159,25 @@ export class EmailComponent {
     console.log('Sending mail with:', mailObject);
     this.traineeDetailsService.sendMail(mailObject);
   }
-  discardMail() {
-  this.mailForm.reset({selectedDomain:'',selectedCc:''});
-  this.selectedDomainDisplay = [];
-  this.selectedCcList = [];
-  this.selectedBccList = [];
-  this.isShowIndividualList = false;
-}
 
+  discardMail(): void {
+    this.mailForm.reset({
+      selectedDomain: '',
+      subject: '',
+      subDomain: '',
+      mailContent: '',
+      selectedCc: '',
+      selectedBcc: '',
+      message: ''
+    });
+
+    this.selectedDomainList = [];
+    this.selectedDomainDisplay = [];
+    this.selectedDomainMailList = [];
+    this.selectedCcList = [];
+    this.selectedBccList = [];
+    this.isShowIndividualList = false;
+  }
+
+  
 }
