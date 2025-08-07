@@ -18,6 +18,7 @@ export const environment = {
      deleteReviewDetails:"http://localhost:3300/deleteReviewDetails",
      sendMail:"http://localhost:3300/sendMail",
      questionBank:"http://localhost:3300/questionBank",
+     uploadQnBank:"http://localhost:3300/questionBankExcelToDatabase",
      addQuestion:"http://localhost:3300/addQuestion",
      editQuestion:"http://localhost:3300/editQuestion",
      deleteQuestion:"http://localhost:3300/deleteQuestion",

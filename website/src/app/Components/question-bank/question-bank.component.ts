@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
 import { TraineeDetailsService } from '../../Service/trainee-details.service';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, } from '@angular/forms';
+import {
+  CommonModule
+} from '@angular/common';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { forkJoin } from 'rxjs';
-
 
 @Component({
   selector: 'app-question-bank',
@@ -12,6 +20,7 @@ import { forkJoin } from 'rxjs';
   styleUrl: './question-bank.component.css'
 })
 export class QuestionBankComponent {
+  // Your existing arrays and flags
   reviewDetails: any[] = [];
   checkreviewDetails: any[] = [];
   questionBank: any[] = [];
@@ -29,14 +38,19 @@ export class QuestionBankComponent {
   checkboxIndex = 1;
 
   questionForm: FormGroup;
-  uploadForm: FormGroup;
+  uploadForm: FormGroup;       // existing reviewDetails upload form
   KeywordForm: FormGroup;
   editQuestionForm: FormGroup;
+  qBankUploadForm!: FormGroup;
+  // New for question bank Excel upload modal
+  showUploadQnBankFile = false;
+  selectedQBankFile: File | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
     private traineeDetailsService: TraineeDetailsService
   ) {
+    // Existing form initializations
     this.KeywordForm = this.formBuilder.group({
       filterByKeyword: new FormControl('', Validators.required),
     });
@@ -58,6 +72,8 @@ export class QuestionBankComponent {
     this.uploadForm = this.formBuilder.group({
       fileUpload: ['', Validators.required],
     });
+    this.qBankUploadForm = this.formBuilder.group({});
+
 
     this.retrieveReviewDetails();
 
@@ -70,22 +86,21 @@ export class QuestionBankComponent {
     return Array.from(this.technologyList);
   }
 
-
   retrieveReviewDetails() {
-  forkJoin([
-    this.traineeDetailsService.reviewDetails(),
-    this.traineeDetailsService.impactTraineeDetails(),
-    this.traineeDetailsService.internshipDetails(),
-    this.traineeDetailsService.getQuestionBank()
-  ]).subscribe(([review, impacts, interns, questions]) => {
-    this.reviewDetails = review;
-    this.impactTraineeList = impacts;
-    this.internList = interns;
-    this.questionBank = questions;
-    this.checkreviewDetails = [...questions];
-    this.allTechList(); // <-- Build list AFTER all data is loaded
-  });
-}
+    forkJoin([
+      this.traineeDetailsService.reviewDetails(),
+      this.traineeDetailsService.impactTraineeDetails(),
+      this.traineeDetailsService.internshipDetails(),
+      this.traineeDetailsService.getQuestionBank()
+    ]).subscribe(([review, impacts, interns, questions]) => {
+      this.reviewDetails = review;
+      this.impactTraineeList = impacts;
+      this.internList = interns;
+      this.questionBank = questions;
+      this.checkreviewDetails = [...questions];
+      this.allTechList(); // Build list AFTER all data is loaded
+    });
+  }
 
   allTechList() {
     this.employeeList = [...this.impactTraineeList, ...this.internList];
@@ -114,23 +129,20 @@ export class QuestionBankComponent {
     }
   }
 
-  // In your component
-deleteQuestion(index: number): void {  // Use `number` for clarity
-  const question = this.questionBank[index];
-  if (confirm(`Are you sure you want to remove ${question.TECHNOLOGY_NAME}?`)) {
-    this.traineeDetailsService.deleteQuestion(question).subscribe({
-      next: () => {
-        this.questionBank.splice(index, 1);
-        this.checkreviewDetails = this.questionBank.slice(); // Optional: Trigger change detection if ngFor
-      },
-      error: (err) => {
-        console.error('Failed to delete question:', err);
-        // Optionally, show an error message to the user
-      }
-    });
+  deleteQuestion(index: number): void {
+    const question = this.questionBank[index];
+    if (confirm(`Are you sure you want to remove ${question.TECHNOLOGY_NAME}?`)) {
+      this.traineeDetailsService.deleteQuestion(question).subscribe({
+        next: () => {
+          this.questionBank.splice(index, 1);
+          this.checkreviewDetails = this.questionBank.slice();
+        },
+        error: (err) => {
+          console.error('Failed to delete question:', err);
+        }
+      });
+    }
   }
-}
-
 
   showEdit() {
     this.showEditMember = !this.showEditMember;
@@ -152,6 +164,73 @@ deleteQuestion(index: number): void {  // Use `number` for clarity
   showQuestion() {
     this.showAddQuestion = !this.showAddQuestion;
     if (this.showAddQuestion) this.allTechList();
+  }
+
+  // Existing selectedFile and onFileChange for reviewDetails upload
+  selectedFile: File | null = null;
+  onQBankFileChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    this.selectedQBankFile = input.files[0];
+  }
+}
+
+
+
+
+  // For Review Details upload (existing)
+  uploadFile(): void {
+    if (this.selectedFile) {
+      this.traineeDetailsService.reviewDetailsSendExcelFile(this.selectedFile).subscribe({
+        next: (res) => {
+          alert('File uploaded successfully!');
+          this.selectedFile = null;
+        },
+        error: (err) => {
+          console.error('Upload error:', err);
+          alert('File upload failed');
+        }
+      });
+    } else {
+      alert('Please select a file before uploading.');
+    }
+  }
+
+  // --- New for Question Bank Excel Upload Modal ---
+
+  // Open/close Question Bank upload modal
+  toggleQuestionBankUploadModal(show: boolean) {
+    this.showUploadQnBankFile = show;
+    if (!show) {
+      this.clearQBankForm();
+    }
+  }
+
+
+  // Clear question bank upload form/modal
+  clearQBankForm() {
+    this.selectedQBankFile = null;
+  }
+
+  // Upload Question Bank Excel File through service
+  uploadQuestionBankFile() {
+    if (!this.selectedQBankFile) {
+      alert('Please select a file before uploading.');
+      return;
+    }
+
+    this.traineeDetailsService.uploadQuestionBankExcelFile(this.selectedQBankFile).subscribe({
+      next: (response) => {
+        alert('Question bank file uploaded successfully!');
+        this.toggleQuestionBankUploadModal(false);
+        // Optionally refresh questionBank data after upload
+        this.retrieveReviewDetails(); 
+      },
+      error: (err) => {
+        console.error('Upload error:', err);
+        alert('Failed to upload question bank file.');
+      }
+    });
   }
 
   deleteAllMembers() {
@@ -181,7 +260,8 @@ deleteQuestion(index: number): void {  // Use `number` for clarity
     this.traineeDetailsService.addQuestion(question).subscribe(
       (res) => {
         alert('Question Added');
-        window.location.reload(); // Prefer to avoid reload, refetch data instead
+        this.retrieveReviewDetails();
+        this.showAddQuestion = false;
       },
       (error) => {
         console.error(error);
@@ -201,7 +281,8 @@ deleteQuestion(index: number): void {  // Use `number` for clarity
     this.traineeDetailsService.editQuestion(editedQuestion).subscribe(
       (res) => {
         alert('Question Edited');
-        window.location.reload(); // Prefer to avoid reload, refetch data instead
+        this.retrieveReviewDetails();
+        this.showEditMember = false;
       },
       (error) => {
         console.error(error);
