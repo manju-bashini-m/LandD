@@ -1,11 +1,11 @@
 export const environment = {
-    impactTraineeDetails : "http://localhost:3300/impactTraineeDetails",
-    deleteImpactTrainee:"http://localhost:3300/deleteImpactTrainee",
-    impactTraineeExcelFile:"http://localhost:3300/impactTraineeExcelToDatabase",
-    deleteAllImpactTrainees:"http://localhost:3300/deleteAllImpactTrainee",
-    internshipExcelFile:"http://localhost:3300/internshipExcelToDatabase",
-    deleteInternship:"http://localhost:3300/deleteInternship",
-    deleteAllInternship:"http://localhost:3300/deleteAllInternship",
+    impactTraineeDetails: "http://localhost:3300/impactTraineeDetails",
+    deleteImpactTrainee: "http://localhost:3300/deleteImpactTrainee",
+    impactTraineeExcelFile: "http://localhost:3300/impactTraineeExcelToDatabase",
+    deleteAllImpactTrainees: "http://localhost:3300/deleteAllImpactTrainee",
+    internshipExcelFile: "http://localhost:3300/internshipExcelToDatabase",
+    deleteInternship: "http://localhost:3300/deleteInternship",
+    deleteAllInternship: "http://localhost:3300/deleteAllInternship",
     internshipDetails: "http://localhost:3300/internshipDetails",
     reviewDetailsExcelFile: "http://localhost:3300/reviewDetailsExcelToDatabase",
     reviewDetails:"http://localhost:3300/reviewDetails",
@@ -25,5 +25,17 @@ export const environment = {
      updateMarks:"http://localhost:3300/updateMarks",
      aiSuggestion:"https://django-genai-api-gehceketc9hvaycr.canadacentral-01.azurewebsites.net/suggestions/generate/",
      sendSuggestionMail: "http://localhost:3300/sendSuggestionMail",
-     downloadExcel:"http://localhost:3300/downloadExcel"
+     downloadExcel:"http://localhost:3300/downloadExcel",
+    updateTNDetails: "http://localhost:3300/updateTNDetails",
+    updateInternDetails: "http://localhost:3300/updateInternDetails",
+    updateTraineeDetails: "http://localhost:3300/updateTraineeDetails",
+
+    addTNMember: "http://localhost:3300/addTNMember",
+    addTraineeMember: "http://localhost:3300/addTraineeMember",
+    deleteSelectedInternDetails: "http://localhost:3300/deleteSelectedInternDetails",
+    deleteSelectedTraineeDetails: "http://localhost:3300/deleteSelectedTraineeDetails",
+    deleteSelectedTNDetails: "http://localhost:3300/deleteSelectedTNDetails",
+
+
+    
 };

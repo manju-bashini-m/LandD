@@ -83,7 +83,7 @@ export class HomePageComponent {
     {
       pageName: 'Notifications',
       icon: 'ph ph-bell-ringing',
-      route: 'notifications',
+      route: 'email',
       downArrow: 'ph ph-caret-down',
       subNavigationLinks: [
         { pageName: 'E-mail', route: 'notifications/email' }

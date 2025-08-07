@@ -11,7 +11,7 @@
     <div class="col">
       <h6 class="text-purple mb-0">Internship</h6>
     </div>
-   </div>
+  </div>
 
   <div class="row mb-3">
     <div class="col-12 col-md-3 mb-2 mb-md-0">
@@ -19,8 +19,9 @@
         <span style="border-color: #fff;" class="input-group-text bg-white border-end-0">
           <i class="ph ph-magnifying-glass"></i>
         </span>
-        <input type="text" style="font-size: 0.8rem; outline: none;  box-shadow: none; border-color: #fff;" class="form-control border-start-0" placeholder="Search by Keyword"
-          formControlName="filterByKeyword" (ngModelChange)="filterByKeyword = $event">
+        <input type="text" style="font-size: 0.8rem; outline: none;  box-shadow: none; border-color: #fff;"
+          class="form-control border-start-0" placeholder="Search by Keyword" formControlName="filterByKeyword"
+          (ngModelChange)="filterByKeyword = $event">
       </form>
     </div>
 
@@ -34,7 +35,8 @@
           <button type="button" style="font-size: 0.8rem;" class="btn btn-light">Employees : {{ TNData.length
             }}</button>
           }
-          <button type="button" class="btn btn-light"><i class="ph ph-download-simple"></i></button>
+          <button type="button" class="btn btn-light" (click)="downloadExcel()"><i
+              class="ph ph-download-simple"></i></button>
           <button type="button" class="btn btn-light" (click)="deleteAllMembers()"><i class="ph ph-trash"></i></button>
       </div>
 
@@ -50,7 +52,7 @@
   </div>
   <div class="row">
     <div class="col">
-      <div class="table-responsive" style="max-height: 250px; overflow-x: auto;">
+      <div class="table-responsive" style="max-height: 250px; overflow-x: auto; overflow-y: auto;">
         <table class="table table-hover" style="min-width: 1200px;">
           <thead class="table-light sticky-top">
             <tr>
@@ -76,7 +78,7 @@
               <td>
                 <input type="checkbox" [id]="'checkbox' + i" class="form-check-input">
               </td>
-              <td class="text-purple" title="{{ data.ACE_ID }}" (click)="showTraineeDetails(i)">{{ data.INT_ID }}</td>
+              <td class="text-purple" title="{{ data.INT_ID }}" (click)="showTraineeDetails(i)">{{ data.INT_ID }}</td>
               <td title="{{ data.NAME }}">{{ data.Name }}</td>
               <td title="{{ data.Mail_Id }}">{{ data.Mail_Id }}</td>
               <td title="{{ data.College }}">{{ data.College }}</td>
@@ -105,19 +107,19 @@
     <div class="modal-content">
       <form [formGroup]="memberForm" (ngSubmit)="addMember(memberForm.value)">
         <div class="modal-header">
-          <h5 class="modal-title">Add Employee</h5>
+          <h6 class="modal-title">Add Intern Detail</h6>
           <button type="button" class="btn-close" (click)="showMember()"></button>
         </div>
         <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
           <div class="row mb-3" *ngFor="let data of crudEmployeeDetails">
             @if(data[0]){
             <div class="col-md-4">
-              <input type="text" class="form-control" [placeholder]="data[0]" formControlName="ACE_ID">
+              <input type="text" class="form-control" [placeholder]="data[0]" formControlName="INT_ID">
             </div>
             }
             @if(data[1]){
             <div class="col-md-4">
-              <input type="text" class="form-control" [placeholder]="data[1]" formControlName="First_Name">
+              <input type="text" class="form-control" [placeholder]="data[1]" formControlName="Name">
             </div>
             }
             @if(data[2]){
@@ -146,7 +148,7 @@
     <div class="modal-content">
       <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
         <div class="modal-header">
-          <h5 class="modal-title">Upload File</h5>
+          <p class="modal-title">Upload File</p>
           <button type="button" class="btn-close" (click)="showFileUpload()"></button>
         </div>
         <div class="modal-body">
@@ -177,18 +179,18 @@
         <div class="modal-body">
           <div class="row mb-3">
             <div class="col-md-6">
-              <input type="text" class="form-control" placeholder="ACE ID" formControlName="ACE_ID">
+              <input type="text" class="form-control" placeholder="INT ID" formControlName="INT_ID">
             </div>
             <div class="col-md-6">
-              <input type="text" class="form-control" placeholder="First Name" formControlName="First_Name">
+              <input type="text" class="form-control" placeholder="First Name" formControlName="Name">
             </div>
           </div>
           <div class="row mb-3">
             <div class="col-md-6">
-              <input type="text" class="form-control" placeholder="Mail ID" formControlName="Mail_ID">
+              <input type="text" class="form-control" placeholder="Mail ID" formControlName="Mail_Id">
             </div>
             <div class="col-md-6">
-              <input type="text" class="form-control" placeholder="College Name" formControlName="College_Name">
+              <input type="text" class="form-control" placeholder="College Name" formControlName="College">
             </div>
           </div>
           <div class="row">
@@ -196,7 +198,7 @@
               <input type="text" class="form-control" placeholder="Practice" formControlName="Practice">
             </div>
             <div class="col-md-6">
-              <input type="text" class="form-control" placeholder="DOJ" formControlName="DOJ">
+              <input type="text" class="form-control" placeholder="DOJ" formControlName="Date_of_Joining">
             </div>
           </div>
         </div>
@@ -204,7 +206,8 @@
           <button type="button" class="btn btn-outline-purple" (click)="clearForm()">
             <i class="ph ph-prohibit"></i> Cancel
           </button>
-          <button type="submit" class="btn btn-purple" [disabled]="!editMemberForm.valid">Submit</button>
+          <button type="submit" class="btn btn-purple" (click)="onEditSubmitClicked()"
+            [disabled]="!editMemberForm.valid">Submit</button>
         </div>
       </form>
     </div>
@@ -215,7 +218,7 @@
 <div class="container-fluid showTraineeDetails py-4">
   <div class="row mb-3">
     <div class="col">
-      <h2>Intern Trainee</h2>
+      <h4>Intern Trainee</h4>
     </div>
     <div class="col-auto">
       <button type="button" class="btn btn-outline-purple" (click)="showTraineeDetails(-1)">
@@ -235,8 +238,8 @@
         <table class="table" style="min-width: 1000px;">
           <tbody>
             <tr>
-              <td style="width: 150px;"><label>Intern ID</label>
-                <p>{{ traineeDetail.INT_ID }}</p>
+              <td style="width: 150px;"><label class="small-text">Intern ID</label>
+                <p class="small-text">{{ traineeDetail.INT_ID }}</p>
               </td>
               <td style="width: 200px;"><label>Name</label>
                 <p>{{ traineeDetail.Name }}</p>
