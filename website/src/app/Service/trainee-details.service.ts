@@ -158,6 +158,12 @@ export class TraineeDetailsService {
     if (file) formData.append('file', file);
     return this.http.post(environment.reviewDetailsExcelFile, formData);
   }
+  uploadQuestionBankExcelFile(file: File): Observable<any> {
+  const formData = new FormData();
+  if (file) formData.append('file', file);
+  // Use your uploadQnBank endpoint
+  return this.http.post(environment.uploadQnBank, formData);
+}
 
   TNDetailsSendExcelFile(file: File): Observable<any> {
     const formData = new FormData();

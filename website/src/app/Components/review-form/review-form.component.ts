@@ -53,6 +53,8 @@ export class ReviewFormComponent {
     this.dataService.reviewFormDetails(reviewFormDetails).subscribe({
         next: (res) => {
           console.log('Response:', res);
+          alert('Review scheduled');  // Show alert on success
+          this.reviewForm.reset();
         },
         error: (err) => {
           console.error('Error:', err);

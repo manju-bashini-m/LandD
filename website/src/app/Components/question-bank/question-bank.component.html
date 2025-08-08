@@ -47,6 +47,14 @@ Description: This component is used to review details of each individual.
                     (click)="showAddQuestion = true">
               <i class="ph ph-plus"></i> Add Question
             </button>
+            <button
+                type="button"
+                class="btn btn-sm d-flex align-items-center gap-1 text-white"
+                style="background-color: #8347ad; border-color: #8347ad; padding: 8px;"
+                (click)="toggleQuestionBankUploadModal(true)">  <!-- Open modal here -->
+                <i class="ph ph-paperclip"></i> Upload Files
+            </button>
+
           </div>
         </div>
 
@@ -134,8 +142,11 @@ Description: This component is used to review details of each individual.
         </div>
         <div class="d-flex gap-2 justify-content-end mt-3">
           <button type="button" class="btn btn-outline-secondary" (click)="showEditMember = false">Cancel</button>
-          <button type="submit" class="btn btn-primary" [disabled]="!editQuestionForm.valid"
-                  (click)="editQuestion(editQuestionForm.value)">Submit</button>
+          <button type="submit" 
+            class="btn text-white"
+            style="background-color:#8347ad;"
+           [disabled]="!editQuestionForm.valid"
+                  (click)="editQuestion(editQuestionForm.value)">Update</button>
         </div>
       </form>
     </div>
@@ -199,3 +210,57 @@ Description: This component is used to review details of each individual.
     </div>
   </div>
 </div>
+
+<!-- Question Bank Upload Modal -->
+<div
+  class="modal show fade d-block"
+  tabindex="-1"
+  role="dialog"
+  *ngIf="showUploadQnBankFile">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Upload Question Bank File</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="toggleQuestionBankUploadModal(false)"></button>
+      </div>
+
+      <!-- Body -->
+      <form [formGroup]="qBankUploadForm" (ngSubmit)="uploadQuestionBankFile()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="qBankFileUpload" class="form-label">Select Excel File</label>
+            <input
+                type="file"
+                id="qBankFileUpload"
+                class="form-control"
+                accept=".xlsx, .xls"
+                (change)="onQBankFileChange($event)" />
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-secondary me-2"
+            (click)="clearQBankForm()">
+            <i class="ph ph-prohibit"></i> Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn text-white"
+            style="background-color:#8347ad;"
+            [disabled]="!qBankUploadForm.valid">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
