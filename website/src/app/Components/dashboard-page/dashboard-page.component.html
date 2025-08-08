@@ -52,15 +52,24 @@
       </div>
     </div>
     <div class="row mt-5 container">
-      <div class="col-12">
-        <div class="bg-white p-4 rounded-4 shadow-sm">
-          <h4 class="mb-3" style="color: var(--secondary-color);">Overview Chart</h4>
-
-          <canvas baseChart [data]="barChartData" [type]="barChartType" [options]="barChartOptions">
+      <div class="container-fluid mt-4">
+        <div class="chart-container">
+          <div class="row mb-3 align-items-center justify-content-between">
+            <div class="col-auto">
+              <h5 class="fw-bold">Freshers Management</h5>
+            </div>
+            <!-- <div class="col-auto">
+            <button class="btn btn-light border dropdown-toggle" type="button" data-bs-toggle="dropdown">
+              Week
+            </button>
+          </div> -->
+          </div>
+          <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="barChartType">
           </canvas>
-
         </div>
+
       </div>
+
     </div>
 
   </div>

@@ -34,11 +34,23 @@
   color: var(--font-color);
 }
 
+h5 {
+  color: var(--font-color);
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
 canvas {
   width: 100% !important;
   height: auto !important;
-  padding: 20px;
-  margin-bottom: auto;
+  padding: 10px;
+}
+
+button.dropdown-toggle {
+  color: var(--secondary-color);
+  font-weight: 500;
 }
 
 .container{
@@ -50,4 +62,13 @@ canvas {
 .ngx-class{
   padding-top: 50px;
 
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
 }
